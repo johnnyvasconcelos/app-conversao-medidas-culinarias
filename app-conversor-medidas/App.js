@@ -8,6 +8,7 @@ export default function App() {
   const [quantidade, setQuantidade] = useState("");
   const [ingrediente, setIngrediente] = useState("");
   const [medida, setMedida] = useState("");
+  const [palavra, setPalavra] = useState("");
 
   const [fontsLoaded] = useFonts({
     "Custom-Regular": require("./assets/fonts/font-regular.ttf"),
@@ -65,7 +66,7 @@ export default function App() {
       "xicara-cafe": "51g",
       "copo-americano": "140g",
       gramas: "175g",
-      quilos: "0.1kg",
+      quilos: "0.2kg",
     },
     "arroz-cru": {
       "colher-sopa": "16g",
@@ -79,11 +80,11 @@ export default function App() {
       quilos: "0.2kg",
     },
     "azeitonas-sem-caroco": {
-      "xicara-cha": "130g(30 unidades)",
-      "xícara-cafe": "34g(8 unidades)",
-      "copo-americano": "95g(22 unidades)",
-      gramas: "30 unidades",
-      quilos: "0.1kg(30 unidades)",
+      "xicara-cha": "130g (30 unidades)",
+      "xicara-cafe": "34g (8 unidades)",
+      "copo-americano": "95g (22 unidades)",
+      gramas: "130g (30 unidades)",
+      quilos: "0.1kg (30 unidades)",
       unidades: "4.3g",
     },
     "carne-moida": {
@@ -95,7 +96,7 @@ export default function App() {
       "xicara-cafe": "50g",
       "copo-americano": "138g",
       gramas: "172g",
-      quilos: "0.1kg",
+      quilos: "0.2kg",
     },
     "feijao-cru": {
       "colher-sopa": "18g",
@@ -120,15 +121,15 @@ export default function App() {
       quilos: "0.1kg",
     },
     "graos-de-milho": {
-      "colher-sopa": "15g(40 unidades)",
-      "colher-sobremesa": "10g(26 unidades)",
-      "colher-cha": "5g(13 unidades)",
-      "colher-cafe": "2.5g(6 unidades)",
+      "colher-sopa": "15g (40 unidades)",
+      "colher-sobremesa": "10g (26 unidades)",
+      "colher-cha": "5g (13 unidades)",
+      "colher-cafe": "2.5g (6 unidades)",
       "xicara-cha": "190g",
       "xicara-cafe": "55g",
       "copo-americano": "130g",
       gramas: "190g",
-      quilos: "0.1kg",
+      quilos: "0.2kg",
       unidades: "0.42g",
     },
     liquidos: {
@@ -154,13 +155,13 @@ export default function App() {
       quilos: 0,
     },
     mel: {
-      "colher-sopa": "15ml(18g)",
-      "colher-sobremesa": "10ml(12g)",
-      "colher-cha": "5ml(6g)",
-      "colher-cafe": "2.5ml(3g)",
-      "xicara-cha": "240ml(300g)",
-      "xicara-cafe": "70ml(87g)",
-      "copo-americano": "190ml(237g)",
+      "colher-sopa": "15ml (18g)",
+      "colher-sobremesa": "10ml (12g)",
+      "colher-cha": "5ml (6g)",
+      "colher-cafe": "2.5ml (3g)",
+      "xicara-cha": "240ml (300g)",
+      "xicara-cafe": "70ml (87g)",
+      "copo-americano": "190ml (237g)",
       gramas: "300g",
       quilos: "0.3kg",
       mililitros: 0,
@@ -169,8 +170,8 @@ export default function App() {
     "creme-de-avela": {
       "colher-sopa": "24g",
       "colher-sobremesa": "16g",
-      "colher-cha": 0,
-      "colher-cafe": 0,
+      "colher-cha": "8g",
+      "colher-cafe": "4g",
       "xicara-cha": "350g",
       "xicara-cafe": "102g",
       "copo-americano": "270g",
@@ -186,7 +187,7 @@ export default function App() {
       "xicara-cafe": "26g",
       "copo-americano": "60g",
       gramas: "90g",
-      quilos: "0.9kg",
+      quilos: "0.09kg",
     },
     "sal-comum": {
       "colher-sopa": "18g",
@@ -218,8 +219,8 @@ export default function App() {
     gramas: "Xícara de Chá",
     quilos: "Xícara de Chá",
     unidades: "Unidade",
-    mililitros: "Miliitros",
-    litros: "Litro",
+    mililitros: "Xícara de Chá",
+    litros: "Xícara de Chá",
   };
 
   const nomesIngredientes = {
@@ -228,10 +229,10 @@ export default function App() {
     "acucar-cristal": "Açúcar Cristal",
     "arroz-cru": "Arroz Cru",
     "azeitonas-sem-caroco": "Azeitonas sem Caroço",
-    "carne-moida": "Carne Moída",
+    "carne-moida": "Carne Moída Crua",
     "feijao-cru": "Feijão Cru",
     "frango-desfiado": "Frango Desfiado",
-    "graos-de-milho": "Grãos de Milho",
+    "graos-de-milho": "Grãos de Milho Cozidos",
     liquidos: "Líquidos",
     manteiga: "Manteiga",
     mel: "Mel",
@@ -330,10 +331,7 @@ export default function App() {
             <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
             <Picker.Item label="Feijão Cru" value="feijao-cru" />
             <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
-            <Picker.Item
-              label="Grãos de Milho Cozidos"
-              value="graos-de-milho"
-            />
+            <Picker.Item label="Grãos de Milho" value="graos-de-milho" />
             <Picker.Item label="Líquidos" value="liquidos" />
             <Picker.Item label="Manteiga" value="manteiga" />
             <Picker.Item label="Mel" value="mel" />
@@ -365,11 +363,12 @@ export default function App() {
 
         <Text style={styles.button}>converter</Text>
         <Text style={styles.info}>
-          Uma{" "}
+          {medidaSelecionada === "copo-americano" ? "Um" : "Uma"}{" "}
           <Text style={styles.destaque}>
             {nomesMedidas[medidaSelecionada] || "xícara de chá"}
           </Text>{" "}
-          comporta aproximadamente{" "}
+          {medidaSelecionada === "unidades" ? "possui" : "comporta"}{" "}
+          aproximadamente{" "}
           <Text style={styles.destaque}>{quantidadeConvertida}</Text> de{" "}
           <Text style={styles.destaque}>
             {nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"}
@@ -407,9 +406,8 @@ const styles = StyleSheet.create({
     borderColor: "#eccb9b",
     borderWidth: 3,
     paddingHorizontal: 15,
-    height: 50,
+    height: 45,
     borderRadius: 8,
-    fontFamily: "Custom-Regular",
     justifyContent: "center",
   },
   selectView: {
@@ -417,13 +415,11 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 8,
     overflow: "hidden",
-    height: 50,
+    height: 45,
     justifyContent: "center",
   },
   select: {
     backgroundColor: "#fdeed3",
-    fontFamily: "Custom-Regular",
-    fontFamily: "Custom-Regular",
     borderRadius: 8,
   },
   button: {
@@ -444,7 +440,6 @@ const styles = StyleSheet.create({
     color: "#4c2e1c",
     textTransform: "uppercase",
     fontSize: 26,
-    fontFamily: "Custom-Bold",
   },
   label: {
     marginTop: 10,
@@ -455,7 +450,6 @@ const styles = StyleSheet.create({
   info: {
     marginTop: 15,
     fontStyle: "italic",
-    fontFamily: "Custom-Regular",
     color: "#647310",
     maxWidth: "88%",
   },
