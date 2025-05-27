@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 import { Picker } from "@react-native-picker/picker";
@@ -17,12 +17,12 @@ export default function App() {
   });
 
   const todasAsMedidas = [
-    { label: "Colher de Sopa", value: "colher-sopa" },
-    { label: "Colher de Sobremesa", value: "colher-sobremesa" },
-    { label: "Colher de Chá", value: "colher-cha" },
-    { label: "Colher de Café", value: "colher-cafe" },
-    { label: "Xícara de Chá", value: "xicara-cha" },
-    { label: "Xícara de Café", value: "xicara-cafe" },
+    { label: "Colher (Sopa)", value: "colher-sopa" },
+    { label: "Colher (Sobremesa)", value: "colher-sobremesa" },
+    { label: "Colher (Chá)", value: "colher-cha" },
+    { label: "Colher (Café)", value: "colher-cafe" },
+    { label: "Xícara (Chá)", value: "xicara-cha" },
+    { label: "Xícara (Café)", value: "xicara-cafe" },
     { label: "Copo Americano", value: "copo-americano" },
     { label: "Gramas", value: "gramas" },
     { label: "Quilos", value: "quilos" },
@@ -148,11 +148,11 @@ export default function App() {
       "colher-sobremesa": "12g",
       "colher-cha": "6g",
       "colher-cafe": "3g",
-      "xicara-cha": 0,
-      "xicara-cafe": 0,
-      "copo-americano": 0,
-      gramas: 0,
-      quilos: 0,
+      "xicara-cha": "200g",
+      "xicara-cafe": "58g",
+      "copo-americano": "158g",
+      gramas: "200g",
+      quilos: "0.2kg",
     },
     mel: {
       "colher-sopa": "15ml (18g)",
@@ -164,8 +164,8 @@ export default function App() {
       "copo-americano": "190ml (237g)",
       gramas: "300g",
       quilos: "0.3kg",
-      mililitros: 0,
-      litros: 0,
+      mililitros: "240ml",
+      litros: "0.2 litros",
     },
     "creme-de-avela": {
       "colher-sopa": "24g",
@@ -194,11 +194,11 @@ export default function App() {
       "colher-sobremesa": "12g",
       "colher-cha": "6g",
       "colher-cafe": "3g",
-      "xicara-cha": 0,
-      "xicara-cafe": 0,
-      "copo-americano": 0,
-      gramas: 0,
-      quilos: 0,
+      "xicara-cha": "243g",
+      "xicara-cafe": "71g",
+      "copo-americano": "192g",
+      gramas: "243g",
+      quilos: "0.2kg",
     },
   };
 
@@ -209,18 +209,18 @@ export default function App() {
     valores[ingredienteSelecionado]?.[medidaSelecionada] ?? 0;
 
   const nomesMedidas = {
-    "colher-sopa": "Colher de Sopa",
-    "colher-sobremesa": "Colher de Sobremesa",
-    "colher-cha": "Colher de Chá",
-    "colher-cafe": "Colher de Café",
-    "xicara-cha": "Xícara de Chá",
-    "xicara-cafe": "Xícara de Café",
+    "colher-sopa": "Colher (Sopa)",
+    "colher-sobremesa": "Colher (Sobremesa)",
+    "colher-cha": "Colher (Chá)",
+    "colher-cafe": "Colher (Café)",
+    "xicara-cha": "Xícara (Chá)",
+    "xicara-cafe": "Xícara (Café)",
     "copo-americano": "Copo Americano",
-    gramas: "Xícara de Chá",
-    quilos: "Xícara de Chá",
+    gramas: "Xícara (Chá)",
+    quilos: "Xícara (Chá)",
     unidades: "Unidade",
-    mililitros: "Xícara de Chá",
-    litros: "Xícara de Chá",
+    mililitros: "Xícara (Chá)",
+    litros: "Xícara (Chá)",
   };
 
   const nomesIngredientes = {
@@ -285,7 +285,9 @@ export default function App() {
         m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
     );
   }
-
+  useEffect(() => {
+    setQuantidade("");
+  }, [medidaSelecionada]);
   return (
     <View style={styles.main}>
       <StatusBar style="auto" />
@@ -312,6 +314,7 @@ export default function App() {
         <View style={styles.selectView}>
           <Picker
             style={styles.select}
+            //mode="dropdown"
             selectedValue={ingrediente}
             onValueChange={(value) => {
               setIngrediente(value);
@@ -343,6 +346,7 @@ export default function App() {
         <View style={styles.selectView}>
           <Picker
             style={styles.select}
+            // mode="dropdown"
             selectedValue={medida}
             onValueChange={(value) => setMedida(value)}
           >
@@ -353,13 +357,42 @@ export default function App() {
           </Picker>
         </View>
         <Text style={styles.label}>Quantidade</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ex: 1"
-          keyboardType="numeric"
-          value={quantidade}
-          onChangeText={setQuantidade}
-        />
+        {["litros", "mililitros", "quilos", "gramas", "unidades"].includes(
+          medidaSelecionada
+        ) ? (
+          <TextInput
+            style={styles.input}
+            placeholder="Ex: 1"
+            keyboardType="numeric"
+            value={quantidade}
+            onChangeText={setQuantidade}
+          />
+        ) : (
+          <View style={styles.selectView}>
+            <Picker
+              style={styles.select}
+              selectedValue={quantidade}
+              onValueChange={(itemValue) => setQuantidade(itemValue)}
+              //mode="dropdown"
+            >
+              {[
+                "1/2",
+                "1",
+                "1 1/2",
+                "2",
+                "2 1/2",
+                "3",
+                "3 1/2",
+                "4",
+                "4 1/2",
+                "5",
+                "5 1/2",
+              ].map((item) => (
+                <Picker.Item label={item} value={item} key={item} />
+              ))}
+            </Picker>
+          </View>
+        )}
 
         <Text style={styles.button}>converter</Text>
         <Text style={styles.info}>
