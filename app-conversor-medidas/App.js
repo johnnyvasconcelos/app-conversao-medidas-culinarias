@@ -15,191 +15,189 @@ export default function App() {
     "Custom-Bolder": require("./assets/fonts/font-bolder.ttf"),
   });
 
+  const todasAsMedidas = [
+    { label: "Colher de Sopa", value: "colher-sopa" },
+    { label: "Colher de Sobremesa", value: "colher-sobremesa" },
+    { label: "Colher de Chá", value: "colher-cha" },
+    { label: "Colher de Café", value: "colher-cafe" },
+    { label: "Xícara de Chá", value: "xicara-cha" },
+    { label: "Xícara de Café", value: "xicara-cafe" },
+    { label: "Copo Americano", value: "copo-americano" },
+    { label: "Gramas", value: "gramas" },
+    { label: "Quilos", value: "quilos" },
+    { label: "Litros", value: "litros" },
+    { label: "Mililitros", value: "mililitros" },
+    { label: "Unidades", value: "unidades" },
+  ];
+
   if (!fontsLoaded) {
     return null;
   }
-
   const valores = {
     "acucar-refinado": {
-      "colher-sopa": 18,
-      "colher-sobremesa": 12,
-      "colher-cha": 6,
-      "colher-cafe": 3,
-      "xicara-cha": 220,
-      "xicara-cafe": 64,
-      "copo-americano": 195,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "18g",
+      "colher-sobremesa": "12g",
+      "colher-cha": "6g",
+      "colher-cafe": "3g",
+      "xicara-cha": "220g",
+      "xicara-cafe": "64g",
+      "copo-americano": "195g",
+      gramas: "220g",
+      quilos: "0.2kg",
     },
     "farinha-de-trigo": {
-      "colher-sopa": 14,
-      "colher-sobremesa": 0,
-      "colher-cha": 0,
-      "colher-cafe": 0,
-      "xicara-cha": 140,
-      "xicara-cafe": 40,
-      "copo-americano": 115,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "14g",
+      "colher-sobremesa": "10g",
+      "colher-cha": "5g",
+      "colher-cafe": "2.5g",
+      "xicara-cha": "140g",
+      "xicara-cafe": "40g",
+      "copo-americano": "115g",
+      gramas: "140g",
+      quilos: "0.1kg",
     },
     "acucar-cristal": {
-      "colher-sopa": 17,
-      "colher-sobremesa": 11,
-      "colher-cha": 6,
-      "colher-cafe": 3,
-      "xicara-cha": 175,
-      "xicara-cafe": 51,
-      "copo-americano": 140,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "17g",
+      "colher-sobremesa": "11g",
+      "colher-cha": "6g",
+      "colher-cafe": "3g",
+      "xicara-cha": "175g",
+      "xicara-cafe": "51g",
+      "copo-americano": "140g",
+      gramas: "175g",
+      quilos: "0.1kg",
     },
     "arroz-cru": {
-      "colher-sopa": 0,
-      "colher-sobremesa": 0,
-      "colher-cha": 0,
-      "colher-cafe": 0,
-      "xicara-cha": 210,
-      "xicara-cafe": 61,
-      "copo-americano": 180,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "16g",
+      "colher-sobremesa": "10g",
+      "colher-cha": "5g",
+      "colher-cafe": "2.5g",
+      "xicara-cha": "210g",
+      "xicara-cafe": "61g",
+      "copo-americano": "180g",
+      gramas: "210g",
+      quilos: "0.2kg",
     },
     "azeitonas-sem-caroco": {
-      "colher-sopa": 0,
-      "colher-sobremesa": 0,
-      "colher-cha": 0,
-      "colher-cafe": 0,
-      "xicara-cha": 30,
-      "xícara-cafe": 8,
-      "copo-americano": 22,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
-      unidades: 4.3,
+      "xicara-cha": "130g(30 unidades)",
+      "xícara-cafe": "34g(8 unidades)",
+      "copo-americano": "95g(22 unidades)",
+      gramas: "30 unidades",
+      quilos: "0.1kg(30 unidades)",
+      unidades: "4.3g",
     },
     "carne-moida": {
-      "colher-sopa": 24,
-      "colher-sobremesa": 0,
-      "colher-cha": 0,
-      "colher-cafe": 0,
-      "xicara-cha": 172,
-      "xicara-cafe": 50,
-      "copo-americano": 138,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "24g",
+      "colher-sobremesa": "18g",
+      "colher-cha": "9g",
+      "colher-cafe": "4.5g",
+      "xicara-cha": "172g",
+      "xicara-cafe": "50g",
+      "copo-americano": "138g",
+      gramas: "172g",
+      quilos: "0.1kg",
     },
     "feijao-cru": {
-      "colher-sopa": 0,
-      "colher-sobremesa": 0,
-      "colher-cha": 0,
-      "colher-cafe": 0,
-      "xicara-cha": 250,
-      "xicara-cafe": 72,
-      "copo-americano": 170,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "18g",
+      "colher-sobremesa": "12g",
+      "colher-cha": "6g",
+      "colher-cafe": "3g",
+      "xicara-cha": "250g",
+      "xicara-cafe": "72g",
+      "copo-americano": "170g",
+      gramas: "250g",
+      quilos: "0.2kg",
     },
     "frango-desfiado": {
-      "colher-sopa": 18,
-      "colher-sobremesa": 0,
-      "colher-cha": 0,
-      "colher-cafe": 0,
-      "xicara-cha": 128,
-      "xicara-cafe": 37,
-      "copo-americano": 0,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "18g",
+      "colher-sobremesa": "12g",
+      "colher-cha": "6g",
+      "colher-cafe": "3g",
+      "xicara-cha": "128g",
+      "xicara-cafe": "37g",
+      "copo-americano": "110g",
+      gramas: "128g",
+      quilos: "0.1kg",
     },
     "graos-de-milho": {
-      "colher-sopa": 15,
-      "colher-sobremesa": 10,
-      "colher-cha": 5,
-      "colher-cafe": 2.5,
-      "xicara-cha": 190,
-      "xicara-cafe": 55,
-      "copo-americano": 130,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "15g(40 unidades)",
+      "colher-sobremesa": "10g(26 unidades)",
+      "colher-cha": "5g(13 unidades)",
+      "colher-cafe": "2.5g(6 unidades)",
+      "xicara-cha": "190g",
+      "xicara-cafe": "55g",
+      "copo-americano": "130g",
+      gramas: "190g",
+      quilos: "0.1kg",
+      unidades: "0.42g",
     },
     liquidos: {
-      "colher-sopa": 15,
-      "colher-sobremesa": 10,
-      "colher-cha": 5,
-      "colher-cafe": 2.5,
-      "xicara-cha": 240,
-      "xicara-cafe": 70,
-      "copo-americano": 190,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "15ml",
+      "colher-sobremesa": "10ml",
+      "colher-cha": "5ml",
+      "colher-cafe": "2.5ml",
+      "xicara-cha": "240ml",
+      "xicara-cafe": "70ml",
+      "copo-americano": "190ml",
+      litros: "0.2 litros",
+      mililitros: "240ml",
     },
     manteiga: {
-      "colher-sopa": 18,
-      "colher-sobremesa": 12,
-      "colher-cha": 6,
-      "colher-cafe": 3,
+      "colher-sopa": "18g",
+      "colher-sobremesa": "12g",
+      "colher-cha": "6g",
+      "colher-cafe": "3g",
       "xicara-cha": 0,
       "xicara-cafe": 0,
       "copo-americano": 0,
       gramas: 0,
       quilos: 0,
-      mililitros: 0,
     },
     mel: {
-      "colher-sopa": 18,
-      "colher-sobremesa": 12,
-      "colher-cha": 6,
-      "colher-cafe": 3,
-      "xicara-cha": 300,
-      "xicara-cafe": 87,
-      "copo-americano": 237,
-      gramas: 0,
-      quilos: 0,
+      "colher-sopa": "15ml(18g)",
+      "colher-sobremesa": "10ml(12g)",
+      "colher-cha": "5ml(6g)",
+      "colher-cafe": "2.5ml(3g)",
+      "xicara-cha": "240ml(300g)",
+      "xicara-cafe": "70ml(87g)",
+      "copo-americano": "190ml(237g)",
+      gramas: "300g",
+      quilos: "0.3kg",
       mililitros: 0,
+      litros: 0,
     },
     "creme-de-avela": {
-      "colher-sopa": 24,
-      "colher-sobremesa": 16,
+      "colher-sopa": "24g",
+      "colher-sobremesa": "16g",
       "colher-cha": 0,
       "colher-cafe": 0,
-      "xicara-cha": 350,
-      "xicara-cafe": 102,
-      "copo-americano": 270,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "xicara-cha": "350g",
+      "xicara-cafe": "102g",
+      "copo-americano": "270g",
+      gramas: "350g",
+      quilos: "0.3kg",
     },
     "po-de-cafe": {
-      "colher-sopa": 9,
-      "colher-sobremesa": 6,
-      "colher-cha": 3,
-      "colher-cafe": 1.5,
-      "xicara-cha": 90,
-      "xicara-cafe": 26,
-      "copo-americano": 60,
-      gramas: 0,
-      quilos: 0,
-      mililitros: 0,
+      "colher-sopa": "9g",
+      "colher-sobremesa": "6g",
+      "colher-cha": "3g",
+      "colher-cafe": "1.5g",
+      "xicara-cha": "90g",
+      "xicara-cafe": "26g",
+      "copo-americano": "60g",
+      gramas: "90g",
+      quilos: "0.9kg",
     },
     "sal-comum": {
-      "colher-sopa": 18,
-      "colher-sobremesa": 12,
-      "colher-cha": 6,
-      "colher-cafe": 3,
+      "colher-sopa": "18g",
+      "colher-sobremesa": "12g",
+      "colher-cha": "6g",
+      "colher-cafe": "3g",
       "xicara-cha": 0,
       "xicara-cafe": 0,
       "copo-americano": 0,
       gramas: 0,
       quilos: 0,
-      mililitros: 0,
     },
   };
 
@@ -217,8 +215,8 @@ export default function App() {
     "xicara-cha": "Xícara de Chá",
     "xicara-cafe": "Xícara de Café",
     "copo-americano": "Copo Americano",
-    gramas: "Gramas",
-    quilos: "Quilo",
+    gramas: "Xícara de Chá",
+    quilos: "Xícara de Chá",
     unidades: "Unidade",
     mililitros: "Miliitros",
     litros: "Litro",
@@ -241,6 +239,51 @@ export default function App() {
     "po-de-cafe": "Pó de Café",
     "sal-comum": "Sal",
   };
+
+  const medidasDisponiveis = Object.keys(valores[ingredienteSelecionado] || {});
+  let medidasFiltradas = todasAsMedidas;
+
+  if (
+    ingrediente === "acucar-refinado" ||
+    ingrediente === "acucar-cristal" ||
+    ingrediente === "arroz-cru" ||
+    ingrediente === "carne-moida" ||
+    ingrediente === "creme-de-avela" ||
+    ingrediente === "farinha-de-trigo" ||
+    ingrediente === "feijao-cru" ||
+    ingrediente === "frango-desfiado" ||
+    ingrediente === "manteiga" ||
+    ingrediente === "po-de-cafe" ||
+    ingrediente === "sal-comum"
+  ) {
+    medidasFiltradas = todasAsMedidas.filter(
+      (m) =>
+        m.value !== "unidades" &&
+        m.value !== "litros" &&
+        m.value !== "mililitros"
+    );
+  } else if (ingrediente === "mel") {
+    medidasFiltradas = todasAsMedidas.filter((m) => m.value !== "unidades");
+  } else if (ingrediente === "azeitonas-sem-caroco") {
+    medidasFiltradas = todasAsMedidas.filter(
+      (m) =>
+        m.value !== "litros" &&
+        m.value !== "mililitros" &&
+        m.value !== "colher-sopa" &&
+        m.value !== "colher-sobremesa" &&
+        m.value !== "colher-cafe" &&
+        m.value !== "colher-cha"
+    );
+  } else if (ingrediente === "graos-de-milho") {
+    medidasFiltradas = todasAsMedidas.filter(
+      (m) => m.value !== "litros" && m.value !== "mililitros"
+    );
+  } else if (ingrediente === "liquidos") {
+    medidasFiltradas = todasAsMedidas.filter(
+      (m) =>
+        m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
+    );
+  }
 
   return (
     <View style={styles.main}>
@@ -267,9 +310,12 @@ export default function App() {
         <Text style={styles.label}>Selecione um Ingrediente</Text>
         <View style={styles.selectView}>
           <Picker
-            selectedValue={ingrediente}
-            onValueChange={(itemValue) => setIngrediente(itemValue)}
             style={styles.select}
+            selectedValue={ingrediente}
+            onValueChange={(value) => {
+              setIngrediente(value);
+              setMedida("");
+            }}
           >
             <Picker.Item label="Selecione..." value="" />
             <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
@@ -282,7 +328,7 @@ export default function App() {
             <Picker.Item label="Carne Moída" value="carne-moida" />
             <Picker.Item label="Creme de Avelã" value="creme-de-avela" />
             <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
-            <Picker.Item label="Feijão Cru" value="fijao-cru" />
+            <Picker.Item label="Feijão Cru" value="feijao-cru" />
             <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
             <Picker.Item
               label="Grãos de Milho Cozidos"
@@ -298,23 +344,14 @@ export default function App() {
         <Text style={styles.label}>Selecione a Medida</Text>
         <View style={styles.selectView}>
           <Picker
-            selectedValue={medida}
-            onValueChange={(itemValue) => setMedida(itemValue)}
             style={styles.select}
+            selectedValue={medida}
+            onValueChange={(value) => setMedida(value)}
           >
-            <Picker.Item label="Selecione..." value="" />
-            <Picker.Item label="Colher de Sopa" value="colher-sopa" />
-            <Picker.Item label="Colher de Sobremesa" value="colher-sobremesa" />
-            <Picker.Item label="Colher de Chá" value="colher-cha" />
-            <Picker.Item label="Colher de Café" value="colher-cafe" />
-            <Picker.Item label="Xícara de Chá" value="xicara-cha" />
-            <Picker.Item label="Xícara de Café" value="xicara-cafe" />
-            <Picker.Item label="Copo Americano" value="copo-americano" />
-            <Picker.Item label="Gramas" value="gramas" />
-            <Picker.Item label="Quilos" value="quilos" />
-            <Picker.Item label="Litros" value="litros" />
-            <Picker.Item label="Mililitros" value="mililitros" />
-            <Picker.Item label="Unidades" value="unidades" />
+            <Picker.Item label="Selecione a medida..." value="" />
+            {medidasFiltradas.map((m) => (
+              <Picker.Item key={m.value} label={m.label} value={m.value} />
+            ))}
           </Picker>
         </View>
         <Text style={styles.label}>Quantidade</Text>
@@ -333,7 +370,7 @@ export default function App() {
             {nomesMedidas[medidaSelecionada] || "xícara de chá"}
           </Text>{" "}
           comporta aproximadamente{" "}
-          <Text style={styles.destaque}>{quantidadeConvertida}g</Text> de{" "}
+          <Text style={styles.destaque}>{quantidadeConvertida}</Text> de{" "}
           <Text style={styles.destaque}>
             {nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"}
           </Text>
