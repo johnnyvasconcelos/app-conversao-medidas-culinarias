@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -208,7 +207,6 @@ export default function Home({ navigation }) {
 
   const medidaSelecionada = medida || "xicara-cha";
   const ingredienteSelecionado = ingrediente || "farinha-de-trigo";
-
   const quantidadeConvertida =
     valores[ingredienteSelecionado]?.[medidaSelecionada] ?? 0;
 
@@ -226,7 +224,6 @@ export default function Home({ navigation }) {
     mililitros: "Xícara (Chá)",
     litros: "Xícara (Chá)",
   };
-
   const nomesIngredientes = {
     "acucar-refinado": "Açúcar Refinado",
     "farinha-de-trigo": "Farinha de Trigo",
@@ -244,10 +241,8 @@ export default function Home({ navigation }) {
     "po-de-cafe": "Pó de Café",
     "sal-comum": "Sal",
   };
-
   const medidasDisponiveis = Object.keys(valores[ingredienteSelecionado] || {});
   let medidasFiltradas = todasAsMedidas;
-
   if (
     ingrediente === "acucar-refinado" ||
     ingrediente === "acucar-cristal" ||
@@ -300,154 +295,122 @@ export default function Home({ navigation }) {
     return null;
   }
   return (
-    <View style={styles.main}>
-      <StatusBar style="auto" />
-      <View style={styles.conversor}>
-        <Image
-          source={require("../assets/images/hat.webp")}
-          style={styles.hat}
-        />
-        <Image
-          source={require("../assets/images/spoon.webp")}
-          style={styles.spoon}
-        />
-        <Text
-          style={{
-            fontFamily: "Custom-Bold",
-            fontSize: 25,
-            textAlign: "center",
-            color: "#4c2e1c",
+    <View style={styles.home}>
+      <Text
+        style={{
+          fontFamily: "Custom-Bold",
+          fontSize: 25,
+          textAlign: "center",
+          color: "#4c2e1c",
+        }}
+      >
+        CONVERSOR DE MEDIDAS CULINÁRIAS
+      </Text>
+      <Text style={styles.label}>Selecione um Ingrediente</Text>
+      <View style={styles.selectView}>
+        <Picker
+          style={styles.select}
+          selectedValue={ingrediente}
+          onValueChange={(value) => {
+            setIngrediente(value);
+            setMedida("");
           }}
         >
-          CONVERSOR DE MEDIDAS CULINÁRIAS
-        </Text>
-        <Text style={styles.label}>Selecione um Ingrediente</Text>
+          <Picker.Item label="Selecione..." value="" />
+          <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
+          <Picker.Item label="Açúcar Cristal" value="acucar-cristal" />
+          <Picker.Item label="Arroz Cru" value="arroz-cru" />
+          <Picker.Item
+            label="Azeitonas sem Caroço"
+            value="azeitonas-sem-caroco"
+          />
+          <Picker.Item label="Carne Moída" value="carne-moida" />
+          <Picker.Item label="Creme de Avelã" value="creme-de-avela" />
+          <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
+          <Picker.Item label="Feijão Cru" value="feijao-cru" />
+          <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
+          <Picker.Item label="Grãos de Milho" value="graos-de-milho" />
+          <Picker.Item label="Líquidos" value="liquidos" />
+          <Picker.Item label="Manteiga" value="manteiga" />
+          <Picker.Item label="Mel" value="mel" />
+          <Picker.Item label="Pó de Café" value="po-de-cafe" />
+          <Picker.Item label="Sal Comum" value="sal-comum" />
+        </Picker>
+      </View>
+      <Text style={styles.label}>Selecione a Medida</Text>
+      <View style={styles.selectView}>
+        <Picker
+          style={styles.select}
+          selectedValue={medida}
+          onValueChange={(value) => setMedida(value)}
+        >
+          <Picker.Item label="Selecione a medida..." value="" />
+          {medidasFiltradas.map((m) => (
+            <Picker.Item key={m.value} label={m.label} value={m.value} />
+          ))}
+        </Picker>
+      </View>
+      <Text style={styles.label}>Quantidade</Text>
+      {["litros", "mililitros", "quilos", "gramas", "unidades"].includes(
+        medidaSelecionada
+      ) ? (
+        <TextInput
+          style={styles.input}
+          placeholder="Ex: 1"
+          keyboardType="numeric"
+          value={quantidade}
+          onChangeText={setQuantidade}
+        />
+      ) : (
         <View style={styles.selectView}>
           <Picker
             style={styles.select}
-            //mode="dropdown"
-            selectedValue={ingrediente}
-            onValueChange={(value) => {
-              setIngrediente(value);
-              setMedida("");
-            }}
+            selectedValue={quantidade}
+            onValueChange={(itemValue) => setQuantidade(itemValue)}
           >
-            <Picker.Item label="Selecione..." value="" />
-            <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
-            <Picker.Item label="Açúcar Cristal" value="acucar-cristal" />
-            <Picker.Item label="Arroz Cru" value="arroz-cru" />
-            <Picker.Item
-              label="Azeitonas sem Caroço"
-              value="azeitonas-sem-caroco"
-            />
-            <Picker.Item label="Carne Moída" value="carne-moida" />
-            <Picker.Item label="Creme de Avelã" value="creme-de-avela" />
-            <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
-            <Picker.Item label="Feijão Cru" value="feijao-cru" />
-            <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
-            <Picker.Item label="Grãos de Milho" value="graos-de-milho" />
-            <Picker.Item label="Líquidos" value="liquidos" />
-            <Picker.Item label="Manteiga" value="manteiga" />
-            <Picker.Item label="Mel" value="mel" />
-            <Picker.Item label="Pó de Café" value="po-de-cafe" />
-            <Picker.Item label="Sal Comum" value="sal-comum" />
-          </Picker>
-        </View>
-        <Text style={styles.label}>Selecione a Medida</Text>
-        <View style={styles.selectView}>
-          <Picker
-            style={styles.select}
-            // mode="dropdown"
-            selectedValue={medida}
-            onValueChange={(value) => setMedida(value)}
-          >
-            <Picker.Item label="Selecione a medida..." value="" />
-            {medidasFiltradas.map((m) => (
-              <Picker.Item key={m.value} label={m.label} value={m.value} />
+            {[
+              "1/4",
+              "1/3",
+              "1/2",
+              "1",
+              "1 1/2",
+              "2",
+              "2 1/2",
+              "3",
+              "3 1/2",
+              "4",
+              "4 1/2",
+              "5",
+              "5 1/2",
+            ].map((item) => (
+              <Picker.Item label={item} value={item} key={item} />
             ))}
           </Picker>
         </View>
-        <Text style={styles.label}>Quantidade</Text>
-        {["litros", "mililitros", "quilos", "gramas", "unidades"].includes(
-          medidaSelecionada
-        ) ? (
-          <TextInput
-            style={styles.input}
-            placeholder="Ex: 1"
-            keyboardType="numeric"
-            value={quantidade}
-            onChangeText={setQuantidade}
-          />
-        ) : (
-          <View style={styles.selectView}>
-            <Picker
-              style={styles.select}
-              selectedValue={quantidade}
-              onValueChange={(itemValue) => setQuantidade(itemValue)}
-              //mode="dropdown"
-            >
-              {[
-                "1/4",
-                "1/3",
-                "1/2",
-                "1",
-                "1 1/2",
-                "2",
-                "2 1/2",
-                "3",
-                "3 1/2",
-                "4",
-                "4 1/2",
-                "5",
-                "5 1/2",
-              ].map((item) => (
-                <Picker.Item label={item} value={item} key={item} />
-              ))}
-            </Picker>
-          </View>
-        )}
-
-        <Pressable style={styles.button} onPress={abrirTelaDados}>
-          <Text style={styles.buttonText}>converter</Text>
-        </Pressable>
-        <Text style={styles.info}>
-          {medidaSelecionada === "copo-americano" ? "Um" : "Uma"}{" "}
-          <Text style={styles.destaque}>
-            {nomesMedidas[medidaSelecionada] || "xícara de chá"}
-          </Text>{" "}
-          {medidaSelecionada === "unidades" ? "possui" : "comporta"}{" "}
-          aproximadamente{" "}
-          <Text style={styles.destaque}>{quantidadeConvertida}</Text> de{" "}
-          <Text style={styles.destaque}>
-            {nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"}
-          </Text>
-          .
+      )}
+      <Pressable style={styles.button} onPress={abrirTelaDados}>
+        <Text style={styles.buttonText}>converter</Text>
+      </Pressable>
+      <Text style={styles.info}>
+        {medidaSelecionada === "copo-americano" ? "Um" : "Uma"}{" "}
+        <Text style={styles.destaque}>
+          {nomesMedidas[medidaSelecionada] || "xícara de chá"}
+        </Text>{" "}
+        {medidaSelecionada === "unidades" ? "possui" : "comporta"}{" "}
+        aproximadamente{" "}
+        <Text style={styles.destaque}>{quantidadeConvertida}</Text> de{" "}
+        <Text style={styles.destaque}>
+          {nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"}
         </Text>
-        <Image
-          source={require("../assets/images/tea.webp")}
-          style={styles.tea}
-        />
-      </View>
+        .
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    backgroundColor: "#f0c993",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  conversor: {
-    width: 300,
-    borderColor: "#4c2e1c",
+  home: {
     backgroundColor: "#f8e2be",
-    borderWidth: 4,
-    borderRadius: 20,
-    paddingHorizontal: 32,
-    paddingVertical: 22,
-    transform: [{ translateY: -20 }],
   },
   input: {
     backgroundColor: "#fdeed3",
@@ -473,7 +436,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#c9522b",
     padding: 12,
-
     marginTop: 15,
     marginBottom: 10,
     borderRadius: 8,
@@ -503,27 +465,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: "#647310",
     maxWidth: "88%",
-  },
-  spoon: {
-    position: "absolute",
-    width: 55,
-    height: 67,
-    top: -45,
-    left: 30,
-  },
-  hat: {
-    width: 80,
-    height: 83,
-    position: "absolute",
-    top: -70,
-    right: 40,
-  },
-  tea: {
-    width: 83,
-    height: 61,
-    position: "absolute",
-    bottom: -25,
-    right: -25,
   },
   destaque: {
     fontWeight: "700",
