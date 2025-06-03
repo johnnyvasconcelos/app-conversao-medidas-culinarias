@@ -15,7 +15,57 @@ export default function Home({ navigation }) {
   const [quantidade, setQuantidade] = useState("");
   const [ingrediente, setIngrediente] = useState("");
   const [medida, setMedida] = useState("");
-
+  const especiais = [0.25, 0.33, 0.5];
+  const [calculo, setCalculo] = useState(0.25);
+  const [calculoVisivel, setCalculoVisivel] = useState("1/4");
+  const formatarFracao = (valor) => {
+    if (valor === 0.25) return "1/4";
+    if (valor === 0.33) return "1/3";
+    if (valor === 0.5) return "1/2";
+    const inteiro = Math.floor(valor);
+    const decimal = +(valor - inteiro).toFixed(2);
+    if (decimal === 0.5) return `${inteiro} 1/2`;
+    if (decimal === 0) return `${inteiro}`;
+    return valor.toString();
+  };
+  const aumentar = () => {
+    setCalculo((prev) => {
+      let novoValor;
+      const idx = especiais.indexOf(prev);
+      if (idx !== -1 && idx < especiais.length - 1) {
+        novoValor = especiais[idx + 1];
+      } else if (prev < 1) {
+        novoValor = 1;
+      } else if (prev >= 1 && prev < 6) {
+        novoValor = +(prev + 0.5).toFixed(2);
+      } else {
+        novoValor = +(prev + 1).toFixed(2);
+      }
+      setCalculoVisivel(formatarFracao(novoValor));
+      return novoValor;
+    });
+  };
+  const diminuir = () => {
+    setCalculo((prev) => {
+      let novoValor;
+      if (prev > 6) {
+        novoValor = +(prev - 1).toFixed(2);
+      } else if (prev > 1) {
+        novoValor = +(prev - 0.5).toFixed(2);
+      } else if (prev === 1) {
+        novoValor = especiais[especiais.length - 1];
+      } else {
+        const idx = especiais.indexOf(prev);
+        if (idx > 0) {
+          novoValor = especiais[idx - 1];
+        } else {
+          novoValor = especiais[0];
+        }
+      }
+      setCalculoVisivel(formatarFracao(novoValor));
+      return novoValor;
+    });
+  };
   const [fontsLoaded] = useFonts({
     "Custom-Regular": require("../assets/fonts/font-regular.ttf"),
     "Custom-Bold": require("../assets/fonts/font-bold.ttf"),
@@ -410,6 +460,13 @@ export default function Home({ navigation }) {
             </Picker>
           </View>
         )}
+        <Pressable onPress={diminuir}>
+          <Text>-</Text>
+        </Pressable>
+        <Text>{calculoVisivel}</Text>
+        <Pressable onPress={aumentar}>
+          <Text>+</Text>
+        </Pressable>
         <Pressable style={styles.button} onPress={abrirTelaDados}>
           <Text style={styles.buttonText}>converter</Text>
         </Pressable>
