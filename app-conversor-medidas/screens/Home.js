@@ -256,8 +256,419 @@ export default function Home({ navigation }) {
 
   const medidaSelecionada = medida || "xicara-cha";
   const ingredienteSelecionado = ingrediente || "farinha-de-trigo";
-  const quantidadeConvertida =
-    valores[ingredienteSelecionado]?.[medidaSelecionada] ?? 0;
+  let quantidadeConvertida = 0;
+
+  if (
+    valores[ingredienteSelecionado] &&
+    valores[ingredienteSelecionado][medidaSelecionada] !== undefined
+  ) {
+    if (ingredienteSelecionado === "acucar-refinado") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 18, unidade: "g" },
+        "colher-sobremesa": { fator: 12, unidade: "g" },
+        "colher-cha": { fator: 6, unidade: "g" },
+        "colher-cafe": { fator: 3, unidade: "g" },
+        "xicara-cha": { fator: 220, unidade: "g" },
+        "xicara-cafe": { fator: 64, unidade: "g" },
+        "copo-americano": { fator: 195, unidade: "g" },
+        gramas: { fator: 220, unidade: "g" },
+        quilos: { fator: 0.22, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = medida.fator * calculo + medida.unidade;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "acucar-cristal") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 17, unidade: "g" },
+        "colher-sobremesa": { fator: 11, unidade: "g" },
+        "colher-cha": { fator: 5.5, unidade: "g" },
+        "colher-cafe": { fator: 2.75, unidade: "g" },
+        "xicara-cha": { fator: 175, unidade: "g" },
+        "xicara-cafe": { fator: 51, unidade: "g" },
+        "copo-americano": { fator: 140, unidade: "g" },
+        gramas: { fator: 175, unidade: "g" },
+        quilos: { fator: 0.175, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "arroz-cru") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 16, unidade: "g" },
+        "colher-sobremesa": { fator: 10, unidade: "g" },
+        "colher-cha": { fator: 5, unidade: "g" },
+        "colher-cafe": { fator: 2.5, unidade: "g" },
+        "xicara-cha": { fator: 210, unidade: "g" },
+        "xicara-cafe": { fator: 61, unidade: "g" },
+        "copo-americano": { fator: 180, unidade: "g" },
+        gramas: { fator: 210, unidade: "g" },
+        quilos: { fator: 0.21, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medidaSelecionada === "quilos") {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(2)}${
+          medida.unidade
+        }`;
+      } else if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "azeitonas-sem-caroco") {
+      const multiplicadores = {
+        "xicara-cha": { peso: 130, unidades: 30, unidade: "g" },
+        unidades: { peso: 4.3, unidade: "g" },
+        "xicara-cafe": { peso: 34, unidades: 8, unidade: "g" },
+        "copo-americano": { peso: 95, unidades: 22, unidade: "g" },
+        gramas: { peso: 130, unidades: null, unidade: "g" },
+        quilos: { peso: 0.13, unidades: null, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medidaSelecionada === "quilos" || medidaSelecionada === "unidades") {
+        quantidadeConvertida = `${(medida.peso * calculo).toFixed(1)}${
+          medida.unidade
+        }`;
+      } else if (medida) {
+        const pesoFinal = Math.round(medida.peso * calculo);
+        const unidadesFinal = medida.unidades
+          ? Math.round(medida.unidades * calculo)
+          : null;
+
+        quantidadeConvertida =
+          `${pesoFinal}${medida.unidade}` +
+          (unidadesFinal ? ` (${unidadesFinal} unidades)` : "");
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "carne-moida") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 24, unidade: "g" },
+        "colher-sobremesa": { fator: 18, unidade: "g" },
+        "colher-cha": { fator: 9, unidade: "g" },
+        "colher-cafe": { fator: 4.5, unidade: "g" },
+        "xicara-cha": { fator: 172, unidade: "g" },
+        "xicara-cafe": { fator: 50, unidade: "g" },
+        "copo-americano": { fator: 138, unidade: "g" },
+        gramas: { fator: 172, unidade: "g" },
+        quilos: { fator: 0.172, unidade: "kg" },
+      };
+
+      const medida = multiplicadores[medidaSelecionada];
+      if (medidaSelecionada === "quilos") {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(2)}${
+          medida.unidade
+        }`;
+      } else if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "creme-de-avela") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 24, unidade: "g" },
+        "colher-sobremesa": { fator: 16, unidade: "g" },
+        "colher-cha": { fator: 8, unidade: "g" },
+        "colher-cafe": { fator: 4, unidade: "g" },
+        "xicara-cha": { fator: 350, unidade: "g" },
+        "xicara-cafe": { fator: 102, unidade: "g" },
+        "copo-americano": { fator: 270, unidade: "g" },
+        gramas: { fator: 350, unidade: "g" },
+        quilos: { fator: 0.35, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medidaSelecionada === "quilos") {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(2)}${
+          medida.unidade
+        }`;
+      } else if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "po-de-cafe") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 9, unidade: "g" },
+        "colher-sobremesa": { fator: 6, unidade: "g" },
+        "colher-cha": { fator: 3, unidade: "g" },
+        "colher-cafe": { fator: 1.5, unidade: "g" },
+        "xicara-cha": { fator: 90, unidade: "g" },
+        "xicara-cafe": { fator: 26, unidade: "g" },
+        "copo-americano": { fator: 60, unidade: "g" },
+        gramas: { fator: 90, unidade: "g" },
+        quilos: { fator: 0.09, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "sal-comum") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 18, unidade: "g" },
+        "colher-sobremesa": { fator: 12, unidade: "g" },
+        "colher-cha": { fator: 6, unidade: "g" },
+        "colher-cafe": { fator: 3, unidade: "g" },
+        "xicara-cha": { fator: 243, unidade: "g" },
+        "xicara-cafe": { fator: 71, unidade: "g" },
+        "copo-americano": { fator: 192, unidade: "g" },
+        gramas: { fator: 243, unidade: "g" },
+        quilos: { fator: 0.243, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "mel") {
+      const multiplicadores = {
+        "colher-sopa": {
+          fator: 18,
+          litros: 15,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-sobremesa": {
+          fator: 12,
+          litros: 10,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-cha": {
+          fator: 6,
+          litros: 5,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-cafe": {
+          fator: 3,
+          litros: 2.5,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "xicara-cha": {
+          fator: 300,
+          litros: 240,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "xicara-cafe": {
+          fator: 87,
+          litros: 70,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "copo-americano": {
+          fator: 327,
+          litros: 190,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        litros: {
+          fator: 300,
+          litros: 0.24,
+          unidade: "g",
+          volumeUnidade: " litros",
+        },
+        mililitros: {
+          fator: 300,
+          litros: 240,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        gramas: { fator: 300, litros: 240, unidade: "g", volumeUnidade: "ml" },
+        quilos: {
+          fator: 0.3,
+          litros: 0.24,
+          unidade: "kg",
+          volumeUnidade: " litros",
+        },
+      };
+
+      const medida = multiplicadores[medidaSelecionada];
+
+      if (medida) {
+        const isUnidadeGrande =
+          medida.unidade === "kg" || medida.volumeUnidade.includes("litro");
+
+        const peso = isUnidadeGrande
+          ? (medida.fator * calculo).toFixed(2)
+          : Math.round(medida.fator * calculo);
+
+        const volume = isUnidadeGrande
+          ? (medida.litros * calculo).toFixed(2)
+          : Math.round(medida.litros * calculo);
+
+        quantidadeConvertida = `${peso}${medida.unidade} (${volume}${medida.volumeUnidade})`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "manteiga") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 18, unidade: "g" },
+        "colher-sobremesa": { fator: 12, unidade: "g" },
+        "colher-cha": { fator: 6, unidade: "g" },
+        "colher-cafe": { fator: 3, unidade: "g" },
+        "xicara-cha": { fator: 200, unidade: "g" },
+        "xicara-cafe": { fator: 58, unidade: "g" },
+        "copo-americano": { fator: 158, unidade: "g" },
+        gramas: { fator: 200, unidade: "g" },
+        quilos: { fator: 0.2, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "graos-de-milho") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 15, unidades: 40, unidade: "g" },
+        "colher-sobremesa": { fator: 10, unidades: 26, unidade: "g" },
+        "colher-cha": { fator: 5, unidades: 13, unidade: "g" },
+        "colher-cafe": { fator: 2.5, unidades: 6, unidade: "g" },
+        "xicara-cha": { peso: 190, unidades: 450, unidade: "g" },
+        unidades: { peso: 0.41, unidade: "g" },
+        "xicara-cafe": { peso: 55, unidades: 130, unidade: "g" },
+        "copo-americano": { peso: 130, unidades: 305, unidade: "g" },
+        gramas: { peso: 190, unidades: null, unidade: "g" },
+        quilos: { peso: 0.19, unidades: null, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medidaSelecionada === "quilos" || medidaSelecionada === "unidades") {
+        quantidadeConvertida = `${(medida.peso * calculo).toFixed(1)}${
+          medida.unidade
+        }`;
+      } else if (medida) {
+        const pesoFinal = Math.round(medida.peso * calculo);
+        const unidadesFinal = medida.unidades
+          ? Math.round(medida.unidades * calculo)
+          : null;
+
+        quantidadeConvertida =
+          `${pesoFinal}${medida.unidade}` +
+          (unidadesFinal ? ` (${unidadesFinal} unidades)` : "");
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "liquidos") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 15, unidade: "ml" },
+        "colher-sobremesa": { fator: 10, unidade: "ml" },
+        "colher-cha": { fator: 5, unidade: "ml" },
+        "colher-cafe": { fator: 2.5, unidade: "ml" },
+        "xicara-cha": { fator: 240, unidade: "ml" },
+        "xicara-cafe": { fator: 70, unidade: "ml" },
+        "copo-americano": { fator: 190, unidade: "ml" },
+        gramas: { fator: 240, unidade: "g" },
+        quilos: { fator: 0.24, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "frango-desfiado") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 18, unidade: "g" },
+        "colher-sobremesa": { fator: 12, unidade: "g" },
+        "colher-cha": { fator: 6, unidade: "g" },
+        "colher-cafe": { fator: 3, unidade: "g" },
+        "xicara-cha": { fator: 128, unidade: "g" },
+        "xicara-cafe": { fator: 37, unidade: "g" },
+        "copo-americano": { fator: 110, unidade: "g" },
+        gramas: { fator: 128, unidade: "g" },
+        quilos: { fator: 0.128, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "feijao-cru") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 18, unidade: "g" },
+        "colher-sobremesa": { fator: 12, unidade: "g" },
+        "colher-cha": { fator: 6, unidade: "g" },
+        "colher-cafe": { fator: 3, unidade: "g" },
+        "xicara-cha": { fator: 250, unidade: "g" },
+        "xicara-cafe": { fator: 72, unidade: "g" },
+        "copo-americano": { fator: 170, unidade: "g" },
+        gramas: { fator: 250, unidade: "g" },
+        quilos: { fator: 0.25, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "acucar-cristal") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 14, unidade: "g" },
+        "colher-sobremesa": { fator: 10, unidade: "g" },
+        "colher-cha": { fator: 5, unidade: "g" },
+        "colher-cafe": { fator: 2.5, unidade: "g" },
+        "xicara-cha": { fator: 140, unidade: "g" },
+        "xicara-cafe": { fator: 40, unidade: "g" },
+        "copo-americano": { fator: 115, unidade: "g" },
+        gramas: { fator: 140, unidade: "g" },
+        quilos: { fator: 0.14, unidade: "kg" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    }
+  }
 
   const nomesMedidas = {
     "colher-sopa": "Colher(es) (Sopa)",
@@ -448,12 +859,22 @@ export default function Home({ navigation }) {
           <Text style={styles.destaque}>
             {nomesMedidas[medidaSelecionada] || "xícara de chá"}
           </Text>{" "}
+          {medidaSelecionada === "unidades" &&
+          ingredienteSelecionado === "azeitonas-sem-caroco"
+            ? "de azeitonas sem caroço "
+            : ""}
+          {medidaSelecionada === "unidades" &&
+          ingredienteSelecionado === "graos-de-milho"
+            ? "de grãos de milho cozidos "
+            : ""}
           {medidaSelecionada === "unidades" ? "possui(em)" : "comporta(m)"}{" "}
           aproximadamente{" "}
-          <Text style={styles.destaque}>{quantidadeConvertida}</Text> de{" "}
-          <Text style={styles.destaque}>
-            {nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"}
-          </Text>
+          <Text style={styles.destaque}>{quantidadeConvertida}</Text>{" "}
+          {medidaSelecionada === "unidades"
+            ? ""
+            : `de ${
+                nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"
+              }`}
           .
         </Text>
       </View>
