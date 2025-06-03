@@ -1,6 +1,20 @@
-import React from "react";
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
-export default function Dados() {
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+const Stack = createNativeStackNavigator();
+export default function Dados({ route, navigation }) {
+  const { ingredienteLabel, medidaLabel, quantidade } = route.params;
+  useEffect(() => {}, []);
+  const abrirTelaHome = () => {
+    navigation.navigate("Home");
+  };
   return (
     <View style={styles.main}>
       <View style={styles.conversor}>
@@ -20,7 +34,7 @@ export default function Dados() {
             color: "#4c2e1c",
           }}
         >
-          4 Xícara(s) de Chá de Farinha de Trigo equivale(m) a:
+          {quantidade} {medidaLabel} de {ingredienteLabel} equivale(m) a:
         </Text>
         <View style={styles.tabela}>
           <View style={styles.tr}>
@@ -57,10 +71,12 @@ export default function Dados() {
           {"\n"}• 1 Copo Americano = <Text style={styles.destaque}>115g</Text>
           {"\n"}• 1 Xícara (Chá) = <Text style={styles.destaque}>140g</Text>
         </Text>
-        <Image
-          source={require("../assets/images/tea.webp")}
-          style={styles.tea}
-        />
+        <Pressable onPress={abrirTelaHome} style={styles.teaDiv}>
+          <Image
+            source={require("../assets/images/back.webp")}
+            style={styles.tea}
+          />
+        </Pressable>
       </View>
     </View>
   );
@@ -133,12 +149,14 @@ const styles = StyleSheet.create({
     top: -70,
     right: 40,
   },
-  tea: {
-    width: 83,
-    height: 61,
+  teaDiv: {
     position: "absolute",
     bottom: -25,
     right: -25,
+  },
+  tea: {
+    width: 83,
+    height: 61,
   },
   info: {
     marginTop: 15,

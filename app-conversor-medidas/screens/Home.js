@@ -211,18 +211,18 @@ export default function Home({ navigation }) {
     valores[ingredienteSelecionado]?.[medidaSelecionada] ?? 0;
 
   const nomesMedidas = {
-    "colher-sopa": "Colher (Sopa)",
-    "colher-sobremesa": "Colher (Sobremesa)",
-    "colher-cha": "Colher (Chá)",
-    "colher-cafe": "Colher (Café)",
-    "xicara-cha": "Xícara (Chá)",
-    "xicara-cafe": "Xícara (Café)",
-    "copo-americano": "Copo Americano",
-    gramas: "Xícara (Chá)",
-    quilos: "Xícara (Chá)",
-    unidades: "Unidade",
-    mililitros: "Xícara (Chá)",
-    litros: "Xícara (Chá)",
+    "colher-sopa": "Colher(es) (Sopa)",
+    "colher-sobremesa": "Colher(es) (Sobremesa)",
+    "colher-cha": "Colher(es) (Chá)",
+    "colher-cafe": "Colher(es) (Café)",
+    "xicara-cha": "Xícara(s) (Chá)",
+    "xicara-cafe": "Xícara(s) (Café)",
+    "copo-americano": "Copo(s) Americano(s)",
+    gramas: "Xícara(s) (Chá)",
+    quilos: "Xícara(s) (Chá)",
+    unidades: "Unidade(s)",
+    mililitros: "Xícara(s) (Chá)",
+    litros: "Xícara(s) (Chá)",
   };
   const nomesIngredientes = {
     "acucar-refinado": "Açúcar Refinado",
@@ -288,7 +288,15 @@ export default function Home({ navigation }) {
     setQuantidade("");
   }, [medidaSelecionada]);
   const abrirTelaDados = () => {
-    navigation.navigate("Dados");
+    const ingredienteLabel = nomesIngredientes[ingrediente];
+    const medidaLabel = nomesMedidas[medida];
+    navigation.navigate("Dados", {
+      ingredienteSelecionado: ingrediente,
+      ingredienteLabel,
+      medidaSelecionada: medida,
+      medidaLabel,
+      quantidade,
+    });
   };
 
   if (!fontsLoaded) {
@@ -330,7 +338,7 @@ export default function Home({ navigation }) {
               setMedida("");
             }}
           >
-            <Picker.Item label="Selecione..." value="" />
+            <Picker.Item label="Selecione o ingrediente" value="" />
             <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
             <Picker.Item label="Açúcar Cristal" value="acucar-cristal" />
             <Picker.Item label="Arroz Cru" value="arroz-cru" />
