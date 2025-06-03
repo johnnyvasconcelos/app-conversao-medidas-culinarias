@@ -12,7 +12,6 @@ import { useFonts } from "expo-font";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 export default function Home({ navigation }) {
-  const [quantidade, setQuantidade] = useState("");
   const [ingrediente, setIngrediente] = useState("");
   const [medida, setMedida] = useState("");
   const especiais = [0.25, 0.33, 0.5];
@@ -334,9 +333,7 @@ export default function Home({ navigation }) {
         m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
     );
   }
-  useEffect(() => {
-    setQuantidade("");
-  }, [medidaSelecionada]);
+  useEffect(() => {}, [medidaSelecionada]);
   const abrirTelaDados = () => {
     const ingredienteLabel = nomesIngredientes[ingrediente];
     const medidaLabel = nomesMedidas[medida];
@@ -345,7 +342,6 @@ export default function Home({ navigation }) {
       ingredienteLabel,
       medidaSelecionada: medida,
       medidaLabel,
-      quantidade,
     });
   };
 
@@ -423,59 +419,36 @@ export default function Home({ navigation }) {
           </Picker>
         </View>
         <Text style={styles.label}>Quantidade</Text>
-        {["litros", "mililitros", "quilos", "gramas", "unidades"].includes(
-          medidaSelecionada
-        ) ? (
-          <TextInput
-            style={styles.input}
-            placeholder="Ex: 1"
-            keyboardType="numeric"
-            value={quantidade}
-            onChangeText={setQuantidade}
-          />
-        ) : (
-          <View style={styles.selectView}>
-            <Picker
-              style={styles.select}
-              selectedValue={quantidade}
-              onValueChange={(itemValue) => setQuantidade(itemValue)}
-            >
-              {[
-                "1/4",
-                "1/3",
-                "1/2",
-                "1",
-                "1 1/2",
-                "2",
-                "2 1/2",
-                "3",
-                "3 1/2",
-                "4",
-                "4 1/2",
-                "5",
-                "5 1/2",
-              ].map((item) => (
-                <Picker.Item label={item} value={item} key={item} />
-              ))}
-            </Picker>
-          </View>
-        )}
-        <Pressable onPress={diminuir}>
-          <Text>-</Text>
-        </Pressable>
-        <Text>{calculoVisivel}</Text>
-        <Pressable onPress={aumentar}>
-          <Text>+</Text>
-        </Pressable>
+        <View style={styles.calculoInput}>
+          <Pressable
+            onPress={diminuir}
+            style={[styles.calculoBtn, styles.calculoBtnEsquerda]}
+          >
+            <Image
+              source={require("../assets/images/diminuir.webp")}
+              style={[styles.calculoImage, styles.calculoImageEsquerda]}
+            />
+          </Pressable>
+          <Text style={styles.calcVisivel}>{calculoVisivel}</Text>
+          <Pressable
+            onPress={aumentar}
+            style={[styles.calculoBtn, styles.calculoBtnDireita]}
+          >
+            <Image
+              source={require("../assets/images/aumentar.webp")}
+              style={[styles.calculoImage, styles.calculoImageDireita]}
+            />
+          </Pressable>
+        </View>
         <Pressable style={styles.button} onPress={abrirTelaDados}>
           <Text style={styles.buttonText}>converter</Text>
         </Pressable>
         <Text style={styles.info}>
-          {medidaSelecionada === "copo-americano" ? "Um" : "Uma"}{" "}
+          {calculoVisivel}{" "}
           <Text style={styles.destaque}>
             {nomesMedidas[medidaSelecionada] || "xícara de chá"}
           </Text>{" "}
-          {medidaSelecionada === "unidades" ? "possui" : "comporta"}{" "}
+          {medidaSelecionada === "unidades" ? "possui(em)" : "comporta(m)"}{" "}
           aproximadamente{" "}
           <Text style={styles.destaque}>{quantidadeConvertida}</Text> de{" "}
           <Text style={styles.destaque}>
@@ -533,6 +506,54 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 8,
     justifyContent: "center",
+  },
+  calculoInput: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fdeed3",
+    borderColor: "#eccb9b",
+    borderTopWidth: 3,
+    borderBottomWidth: 3,
+    borderRadius: 8,
+  },
+  calcVisivel: {
+    fontSize: 16,
+    color: "#4c2e1c",
+  },
+  calculoBtn: {
+    justifyContent: "center",
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    paddingVertical: 7,
+    backgroundColor: "#fdeed3",
+    borderColor: "#eccb9b",
+    marginTop: -3,
+    marginBottom: -3,
+    height: 45,
+    alignItems: "center",
+    borderWidth: 3,
+  },
+  calculoImageEsquerda: {
+    width: 13,
+    height: 12.5,
+  },
+  calculoImageDireita: {
+    width: 13,
+    height: 12.5,
+  },
+  calculoBtnEsquerda: {
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+  },
+  calculoBtnDireita: {
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+  },
+  calculoText: {
+    fontSize: 20,
+    fontWeight: 700,
+    color: "#746d61",
   },
   selectView: {
     borderColor: "#eccb9b",
