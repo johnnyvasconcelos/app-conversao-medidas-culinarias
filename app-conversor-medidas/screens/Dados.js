@@ -22,12 +22,16 @@ export default function Dados({ route, navigation }) {
     navigation.navigate("Home");
   };
   let valorGramas = 0;
+  let valorColherSopa = 0;
   if (ingredienteLabel == "Farinha de Trigo") {
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
         valorGramas = 1000 * calculo;
+      } else if (medidaSelecionada == "gramas") {
+        valorGramas = 1 * calculo;
       } else {
         valorGramas = 140 * calculo;
+        valorColherSopa = valorGramas / 14;
       }
     } else if (medidaLabel == "Xícara(s) (Café)") {
       valorGramas = 35 * calculo;
@@ -38,6 +42,8 @@ export default function Dados({ route, navigation }) {
     } else if (medidaLabel == "Colher(es) (Sobremesa)") {
       valorGramas = 10 * calculo;
     } else if (medidaLabel == "Colher(es) (Chá)") {
+      valorGramas = 5 * calculo;
+    } else if (medidaLabel == "Colher(es) (Café)") {
       valorGramas = 2.5 * calculo;
     }
   }
@@ -77,7 +83,7 @@ export default function Dados({ route, navigation }) {
             <Text style={styles.td2}>Gramas</Text>
           </View>
           <View style={styles.tr}>
-            <Text style={styles.td1}>40,0</Text>
+            <Text style={styles.td1}>{valorColherSopa}</Text>
             <Text style={styles.td2}>Colher(es) Sopa</Text>
           </View>
           <View style={styles.tr}>
