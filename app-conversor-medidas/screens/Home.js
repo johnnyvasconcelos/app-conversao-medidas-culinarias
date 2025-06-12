@@ -4,7 +4,9 @@ import {
   Text,
   View,
   TextInput,
+  Modal,
   Image,
+  Button,
   Pressable,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
@@ -14,6 +16,7 @@ const Stack = createNativeStackNavigator();
 export default function Home({ navigation }) {
   const [ingrediente, setIngrediente] = useState("");
   const [medida, setMedida] = useState("");
+  const [erroVisible, setErroVisible] = useState(false);
   const especiais = [0.25, 0.33, 0.5];
   const [calculo, setCalculo] = useState(0.25);
   const [calculoVisivel, setCalculoVisivel] = useState("1/4");
@@ -646,7 +649,7 @@ export default function Home({ navigation }) {
         quantidadeConvertida =
           valores[ingredienteSelecionado][medidaSelecionada];
       }
-    } else if (ingredienteSelecionado === "acucar-cristal") {
+    } else if (ingredienteSelecionado === "farinha-de-trigo") {
       const multiplicadores = {
         "colher-sopa": { fator: 14, unidade: "g" },
         "colher-sobremesa": { fator: 10, unidade: "g" },
@@ -748,12 +751,16 @@ export default function Home({ navigation }) {
   const abrirTelaDados = () => {
     const ingredienteLabel = nomesIngredientes[ingrediente];
     const medidaLabel = nomesMedidas[medida];
-    navigation.navigate("Dados", {
-      ingredienteSelecionado: ingrediente,
-      ingredienteLabel,
-      medidaSelecionada: medida,
-      medidaLabel,
-    });
+    if (ingredienteLabel && medidaLabel) {
+      navigation.navigate("Dados", {
+        ingredienteSelecionado: ingrediente,
+        ingredienteLabel,
+        medidaSelecionada: medida,
+        medidaLabel,
+      });
+    } else {
+      setErroVisible(true);
+    }
   };
 
   if (!fontsLoaded) {
@@ -854,6 +861,33 @@ export default function Home({ navigation }) {
         <Pressable style={styles.button} onPress={abrirTelaDados}>
           <Text style={styles.buttonText}>converter</Text>
         </Pressable>
+        <Modal transparent visible={erroVisible} animationType="fade">
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#00000099",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#fff",
+                padding: 20,
+                borderRadius: 12,
+                width: "80%",
+              }}
+            >
+              <Text style={{ fontSize: 18, marginBottom: 10 }}>⚠️ Atenção</Text>
+              <Text>Preencha os dados corretamente!</Text>
+              <Button
+                style={{ fontSize: 18, marginBottom: 10 }}
+                title="Fechar"
+                onPress={() => setErroVisible(false)}
+              />
+            </View>
+          </View>
+        </Modal>
         <Text style={styles.info}>
           {calculoVisivel}{" "}
           <Text style={styles.destaque}>
@@ -1017,5 +1051,8 @@ const styles = StyleSheet.create({
   destaque: {
     fontWeight: "700",
     color: "#7a750d",
+  },
+  modalButton: {
+    backgroundColor: "#2dac99",
   },
 });
