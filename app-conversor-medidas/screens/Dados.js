@@ -15,6 +15,13 @@ export default function Dados({ route, navigation }) {
   const abrirTelaHome = () => {
     navigation.navigate("Home");
   };
+  let valorAtual = 0;
+  if (
+    ingredienteLabel == "Farinha de Trigo" &&
+    medidaLabel == "Xícara(s) (Chá)"
+  ) {
+    valorAtual = 140 * quantidade;
+  }
   return (
     <View style={styles.main}>
       <View style={styles.conversor}>
@@ -38,7 +45,7 @@ export default function Dados({ route, navigation }) {
         </Text>
         <View style={styles.tabela}>
           <View style={styles.tr}>
-            <Text style={styles.td1}>560,0</Text>
+            <Text style={styles.td1}>{valorAtual}</Text>
             <Text style={styles.td2}>Gramas</Text>
           </View>
           <View style={styles.tr}>

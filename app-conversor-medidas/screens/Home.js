@@ -757,6 +757,7 @@ export default function Home({ navigation }) {
         ingredienteLabel,
         medidaSelecionada: medida,
         medidaLabel,
+        quantidade: calculoVisivel,
       });
     } else {
       setErroVisible(true);
@@ -872,19 +873,37 @@ export default function Home({ navigation }) {
           >
             <View
               style={{
-                backgroundColor: "#fff",
-                padding: 20,
+                backgroundColor: "#fdeed3",
+                padding: 25,
                 borderRadius: 12,
                 width: "80%",
               }}
             >
-              <Text style={{ fontSize: 18, marginBottom: 10 }}>⚠️ Atenção</Text>
-              <Text>Preencha os dados corretamente!</Text>
-              <Button
-                style={{ fontSize: 18, marginBottom: 10 }}
-                title="Fechar"
+              <Text
+                style={{ fontSize: 18, marginBottom: 20, textAlign: "center" }}
+              >
+                Selecione Ingrediente e Medida! ☕
+              </Text>
+              <Pressable
                 onPress={() => setErroVisible(false)}
-              />
+                style={{
+                  backgroundColor: "#c9522b",
+                  paddingVertical: 12,
+                  paddingHorizontal: 24,
+                  borderRadius: 8,
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 16,
+                    fontFamily: "Custom-Bold",
+                  }}
+                >
+                  FECHAR
+                </Text>
+              </Pressable>
             </View>
           </View>
         </Modal>
