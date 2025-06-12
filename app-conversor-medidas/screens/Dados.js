@@ -22,7 +22,19 @@ export default function Dados({ route, navigation }) {
     navigation.navigate("Home");
   };
   let valorGramas = 0;
+  let valorGramasExibicao = 0;
+  let valorQuilos = 0;
   let valorColherSopa = 0;
+  let valorColherSobremesa = 0;
+  let valorColherCha = 0;
+  let valorColherCafe = 0;
+  let valorCopoAmericano = 0;
+  let valorXicaraCha = 0;
+  let valorXicaraCafe = 0;
+  let valorLitros = 0;
+  let valorMililitros = 0;
+  let valorUnidades = 0;
+  // cálculos
   if (ingredienteLabel == "Farinha de Trigo") {
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -31,7 +43,15 @@ export default function Dados({ route, navigation }) {
         valorGramas = 1 * calculo;
       } else {
         valorGramas = 140 * calculo;
-        valorColherSopa = valorGramas / 14;
+        valorGramasExibicao = (140 * calculo).toFixed(2).replace(".", ",");
+        valorColherSopa = (valorGramas / 14).toFixed(2).replace(".", ",");
+        valorColherSobremesa = (valorGramas / 10).toFixed(2).replace(".", ",");
+        valorColherCha = (valorGramas / 5).toFixed(2).replace(".", ",");
+        valorColherCafe = (valorGramas / 2.5).toFixed(2).replace(".", ",");
+        valorCopoAmericano = (valorGramas / 115).toFixed(2).replace(".", ",");
+        valorQuilos = (0.14 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = 0 * calculo;
+        valorXicaraCafe = (valorGramas / 40).toFixed(2).replace(".", ",");
       }
     } else if (medidaLabel == "Xícara(s) (Café)") {
       valorGramas = 35 * calculo;
@@ -39,14 +59,31 @@ export default function Dados({ route, navigation }) {
       valorGramas = 115 * calculo;
     } else if (medidaLabel == "Colher(es) (Sopa)") {
       valorGramas = 14 * calculo;
+      valorGramasExibicao = (14 * calculo).toFixed(2).replace(".", ",");
+      valorColherSobremesa = (valorGramas / 10).toFixed(2).replace(".", ",");
+      valorColherCha = (valorGramas / 5).toFixed(2).replace(".", ",");
+      valorColherCafe = (valorGramas / 2.5).toFixed(2).replace(".", ",");
+      valorCopoAmericano = (valorGramas / 115).toFixed(2).replace(".", ",");
+      valorQuilos = (0.014 * calculo).toFixed(2).replace(".", ",");
+      valorXicaraCha = (valorGramas / 140).toFixed(2).replace(".", ",");
+      valorXicaraCafe = (valorGramas / 35).toFixed(2).replace(".", ",");
     } else if (medidaLabel == "Colher(es) (Sobremesa)") {
       valorGramas = 10 * calculo;
+      valorGramasExibicao = (10 * calculo).toFixed(2).replace(".", ",");
+      valorColherSopa = (valorGramas / 14).toFixed(2).replace(".", ",");
+      valorColherCafe = valorGramas / 2.5;
+      valorColherCha = valorGramas / 5;
+      valorXicaraCha = valorGramas / 140;
+      valorCopoAmericano = valorGramas / 115;
+      valorXicaraCafe = valorGramas / 35;
+      valorQuilos = 0.01 * calculo;
     } else if (medidaLabel == "Colher(es) (Chá)") {
       valorGramas = 5 * calculo;
     } else if (medidaLabel == "Colher(es) (Café)") {
       valorGramas = 2.5 * calculo;
     }
   }
+  // medidaSelecionada
   if (medidaSelecionada == "gramas") {
     medidaLabel = "Grama(s)";
   } else if (medidaSelecionada == "quilos") {
@@ -78,34 +115,30 @@ export default function Dados({ route, navigation }) {
           {quantidade} {medidaLabel} de {ingredienteLabel} equivale(m) a:
         </Text>
         <View style={styles.tabela}>
-          <View style={styles.tr}>
-            <Text style={styles.td1}>{valorGramas}</Text>
-            <Text style={styles.td2}>Gramas</Text>
-          </View>
-          <View style={styles.tr}>
-            <Text style={styles.td1}>{valorColherSopa}</Text>
-            <Text style={styles.td2}>Colher(es) Sopa</Text>
-          </View>
-          <View style={styles.tr}>
-            <Text style={styles.td1}>56,0</Text>
-            <Text style={styles.td2}>Colher(es) Sobremesa</Text>
-          </View>
-          <View style={styles.tr}>
-            <Text style={styles.td1}>112,0</Text>
-            <Text style={styles.td2}>Colher(es) Chá</Text>
-          </View>
-          <View style={styles.tr}>
-            <Text style={styles.td1}>224,0</Text>
-            <Text style={styles.td2}>Colher(es) Café</Text>
-          </View>
-          <View style={styles.tr}>
-            <Text style={styles.td1}>5,0</Text>
-            <Text style={styles.td2}>Copo(s) Americano(s)</Text>
-          </View>
-          <View style={[styles.tr, styles.trLast]}>
-            <Text style={styles.td1}>0,6</Text>
-            <Text style={styles.td2}>Quilo(s)</Text>
-          </View>
+          {[
+            { valor: valorColherSopa, label: "Colher(es) Sopa" },
+            { valor: valorColherSobremesa, label: "Colher(es) Sobremesa" },
+            { valor: valorColherCha, label: "Colher(es) Chá" },
+            { valor: valorColherCafe, label: "Colher(es) Café" },
+            { valor: valorXicaraCha, label: "Xícara(s) (Chá)" },
+            { valor: valorXicaraCafe, label: "Xícara(s) (Café)" },
+            { valor: valorCopoAmericano, label: "Copo(s) Americano(s)" },
+            { valor: valorGramasExibicao, label: "Gramas" },
+            { valor: valorQuilos, label: "Quilo(s)" },
+            { valor: valorMililitros, label: "Mililitro(s)" },
+            { valor: valorLitros, label: "Litro(s)" },
+            { valor: valorUnidades, label: "Unidade(s)" },
+          ]
+            .filter((item) => item.valor !== 0)
+            .map((item, index, array) => (
+              <View
+                key={item.label}
+                style={[styles.tr, index === array.length - 1 && styles.trLast]}
+              >
+                <Text style={styles.td1}>{item.valor}</Text>
+                <Text style={styles.td2}>{item.label}</Text>
+              </View>
+            ))}
         </View>
         <Text style={styles.info}>
           • 1 Colher (Sopa) = <Text style={styles.destaque}>14g</Text>
@@ -160,10 +193,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   td1: {
-    padding: 10,
+    paddingVertical: 10,
     borderRightWidth: 1,
     borderColor: "#cda571",
-    width: "27%",
+    width: "29%",
     fontWeight: 700,
     color: "#4c2e1c",
     fontSize: 14,
@@ -174,7 +207,7 @@ const styles = StyleSheet.create({
     color: "#4c2e1c",
     fontSize: 14,
     backgroundColor: "#fcd9a3",
-    width: "73%",
+    width: "71%",
   },
   spoon: {
     position: "absolute",
