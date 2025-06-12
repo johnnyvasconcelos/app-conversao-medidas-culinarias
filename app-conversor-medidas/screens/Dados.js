@@ -10,17 +10,45 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 export default function Dados({ route, navigation }) {
-  const { ingredienteLabel, medidaLabel, quantidade } = route.params;
+  let {
+    ingredienteLabel,
+    medidaLabel,
+    quantidade,
+    calculo,
+    medidaSelecionada,
+  } = route.params;
   useEffect(() => {}, []);
   const abrirTelaHome = () => {
     navigation.navigate("Home");
   };
-  let valorAtual = 0;
-  if (
-    ingredienteLabel == "Farinha de Trigo" &&
-    medidaLabel == "Xícara(s) (Chá)"
-  ) {
-    valorAtual = 140 * quantidade;
+  let valorGramas = 0;
+  if (ingredienteLabel == "Farinha de Trigo") {
+    if (medidaLabel == "Xícara(s) (Chá)") {
+      if (medidaSelecionada == "quilos") {
+        valorGramas = 1000 * calculo;
+      } else {
+        valorGramas = 140 * calculo;
+      }
+    } else if (medidaLabel == "Xícara(s) (Café)") {
+      valorGramas = 35 * calculo;
+    } else if (medidaLabel == "Copo(s) Americano(s)") {
+      valorGramas = 115 * calculo;
+    } else if (medidaLabel == "Colher(es) (Sopa)") {
+      valorGramas = 14 * calculo;
+    } else if (medidaLabel == "Colher(es) (Sobremesa)") {
+      valorGramas = 10 * calculo;
+    } else if (medidaLabel == "Colher(es) (Chá)") {
+      valorGramas = 2.5 * calculo;
+    }
+  }
+  if (medidaSelecionada == "gramas") {
+    medidaLabel = "Grama(s)";
+  } else if (medidaSelecionada == "quilos") {
+    medidaLabel = "Quilo(s)";
+  } else if (medidaSelecionada == "litros") {
+    medidaLabel = "Litro(s)";
+  } else if (medidaSelecionada == "mililitros") {
+    medidaLabel = "Mililitro(s)";
   }
   return (
     <View style={styles.main}>
@@ -45,7 +73,7 @@ export default function Dados({ route, navigation }) {
         </Text>
         <View style={styles.tabela}>
           <View style={styles.tr}>
-            <Text style={styles.td1}>{valorAtual}</Text>
+            <Text style={styles.td1}>{valorGramas}</Text>
             <Text style={styles.td2}>Gramas</Text>
           </View>
           <View style={styles.tr}>

@@ -758,6 +758,7 @@ export default function Home({ navigation }) {
         medidaSelecionada: medida,
         medidaLabel,
         quantidade: calculoVisivel,
+        calculo,
       });
     } else {
       setErroVisible(true);
