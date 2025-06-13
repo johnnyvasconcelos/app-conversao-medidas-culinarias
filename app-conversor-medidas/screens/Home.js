@@ -73,6 +73,22 @@ export default function Home({ navigation }) {
     "Custom-Bold": require("../assets/fonts/font-bold.ttf"),
     "Custom-Bolder": require("../assets/fonts/font-bolder.ttf"),
   });
+  function interpretarFracao(entrada) {
+    entrada = entrada.replace(",", ".").trim();
+
+    if (entrada.includes("/")) {
+      const [numerador, denominador] = entrada.split("/").map(Number);
+      if (!isNaN(numerador) && !isNaN(denominador) && denominador !== 0) {
+        return numerador / denominador;
+      }
+    } else {
+      const valor = parseFloat(entrada);
+      if (!isNaN(valor)) {
+        return valor;
+      }
+    }
+    return NaN;
+  }
 
   const todasAsMedidas = [
     { label: "Colher (Sopa)", value: "colher-sopa" },
@@ -747,6 +763,10 @@ export default function Home({ navigation }) {
         m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
     );
   }
+  useEffect(() => {
+    setCalculoVisivel(formatarFracao(calculo));
+  }, [calculo]);
+
   useEffect(() => {}, [medidaSelecionada]);
   const abrirTelaDados = () => {
     const ingredienteLabel = nomesIngredientes[ingrediente];
@@ -849,7 +869,18 @@ export default function Home({ navigation }) {
               style={[styles.calculoImage, styles.calculoImageEsquerda]}
             />
           </Pressable>
-          <Text style={styles.calcVisivel}>{calculoVisivel}</Text>
+          <TextInput
+            style={styles.calcVisivel}
+            value={calculoVisivel}
+            onChangeText={(texto) => {
+              setCalculoVisivel(texto);
+              const numero = interpretarFracao(texto);
+              if (!isNaN(numero)) {
+                setCalculo(numero);
+              }
+            }}
+            keyboardType="numeric"
+          />
           <Pressable
             onPress={aumentar}
             style={[styles.calculoBtn, styles.calculoBtnDireita]}
@@ -951,6 +982,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     paddingVertical: 22,
     width: "85%",
+    marginTop: -15,
   },
   spoon: {
     position: "absolute",
@@ -1003,8 +1035,8 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     backgroundColor: "#fdeed3",
     borderColor: "#eccb9b",
-    marginTop: -3,
-    marginBottom: -3,
+    marginTop: -6,
+    marginBottom: -6,
     height: 45,
     alignItems: "center",
     borderWidth: 3,
@@ -1067,6 +1099,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: "#647310",
     maxWidth: "88%",
+    fontSize: 12,
   },
   destaque: {
     fontWeight: "700",

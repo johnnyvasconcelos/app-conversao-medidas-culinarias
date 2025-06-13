@@ -83,6 +83,7 @@ export default function Dados({ route, navigation }) {
   let valorLitros = 0;
   let valorMililitros = 0;
   let valorUnidades = 0;
+
   if (ingredienteLabel == "Farinha de Trigo") {
     const calcularConversoes = (pesoGramas, gramasExib = pesoGramas) => {
       valorGramas = pesoGramas;
@@ -237,58 +238,6 @@ export default function Dados({ route, navigation }) {
     } else if (medidaLabel == "Colher(es) (Café)") {
       calcularConversoes(2.75 * calculo);
       valorQuilos = (0.00275 * calculo).toFixed(2).replace(".", ",");
-      valorColherCafe = 0;
-    }
-  } else if (ingredienteLabel == "Arroz Cru") {
-    const calcularConversoes = (pesoGramas, gramasExib = pesoGramas) => {
-      valorGramas = pesoGramas;
-      valorGramasExibicao = gramasExib.toFixed(2).replace(".", ",");
-      valorColherSobremesa = (pesoGramas / 10).toFixed(2).replace(".", ",");
-      valorColherSopa = (pesoGramas / 16).toFixed(2).replace(".", ",");
-      valorColherCha = (pesoGramas / 5).toFixed(2).replace(".", ",");
-      valorColherCafe = (pesoGramas / 2.5).toFixed(2).replace(".", ",");
-      valorCopoAmericano = (pesoGramas / 140).toFixed(2).replace(".", ",");
-      valorXicaraCha = (pesoGramas / 180).toFixed(2).replace(".", ",");
-      valorXicaraCafe = (pesoGramas / 61).toFixed(2).replace(".", ",");
-    };
-    if (medidaLabel == "Xícara(s) (Chá)") {
-      if (medidaSelecionada == "quilos") {
-        calcularConversoes(1000 * calculo);
-        valorQuilos = 0;
-        valorXicaraCha = ((1000 * calculo) / 210).toFixed(2).replace(".", ",");
-      } else if (medidaSelecionada == "gramas") {
-        calcularConversoes(1 * calculo, 0);
-        valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
-        valorXicaraCha = (calculo / 210).toFixed(2).replace(".", ",");
-        valorGramasExibicao = 0;
-      } else {
-        calcularConversoes(210 * calculo);
-        valorQuilos = (0.21 * calculo).toFixed(2).replace(".", ",");
-        valorXicaraCha = 0;
-      }
-    } else if (medidaLabel == "Xícara(s) (Café)") {
-      calcularConversoes(61 * calculo);
-      valorQuilos = (0.061 * calculo).toFixed(2).replace(".", ",");
-      valorXicaraCafe = 0;
-    } else if (medidaLabel == "Copo(s) Americano(s)") {
-      calcularConversoes(180 * calculo);
-      valorQuilos = (0.18 * calculo).toFixed(2).replace(".", ",");
-      valorCopoAmericano = 0;
-    } else if (medidaLabel == "Colher(es) (Sopa)") {
-      calcularConversoes(16 * calculo);
-      valorQuilos = (0.016 * calculo).toFixed(2).replace(".", ",");
-      valorColherSopa = 0;
-    } else if (medidaLabel == "Colher(es) (Sobremesa)") {
-      calcularConversoes(10 * calculo);
-      valorQuilos = (0.01 * calculo).toFixed(2).replace(".", ",");
-      valorColherSobremesa = 0;
-    } else if (medidaLabel == "Colher(es) (Chá)") {
-      calcularConversoes(5 * calculo);
-      valorQuilos = (0.005 * calculo).toFixed(2).replace(".", ",");
-      valorColherCha = 0;
-    } else if (medidaLabel == "Colher(es) (Café)") {
-      calcularConversoes(2.5 * calculo);
-      valorQuilos = (0.0025 * calculo).toFixed(2).replace(".", ",");
       valorColherCafe = 0;
     }
   } else if (ingredienteLabel == "Arroz Cru") {
@@ -599,7 +548,6 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 130).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 190).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 55).toFixed(2).replace(".", ",");
-      valorUnidades = (pesoGramas / 0.42).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -835,6 +783,110 @@ export default function Dados({ route, navigation }) {
       valorMililitros = (2.5 * calculo).toFixed(2).replace(".", ",");
       valorLitros = ((2.5 * calculo) / 1000).toFixed(2).replace(".", ",");
     }
+  } else if (ingredienteLabel == "Pó de Café") {
+    const calcularConversoes = (pesoGramas, gramasExib = pesoGramas) => {
+      valorGramas = pesoGramas;
+      valorGramasExibicao = gramasExib.toFixed(2).replace(".", ",");
+      valorColherSobremesa = (pesoGramas / 6).toFixed(2).replace(".", ",");
+      valorColherSopa = (pesoGramas / 9).toFixed(2).replace(".", ",");
+      valorColherCha = (pesoGramas / 3).toFixed(2).replace(".", ",");
+      valorColherCafe = (pesoGramas / 1.5).toFixed(2).replace(".", ",");
+      valorCopoAmericano = (pesoGramas / 60).toFixed(2).replace(".", ",");
+      valorXicaraCha = (pesoGramas / 90).toFixed(2).replace(".", ",");
+      valorXicaraCafe = (pesoGramas / 26).toFixed(2).replace(".", ",");
+    };
+    if (medidaLabel == "Xícara(s) (Chá)") {
+      if (medidaSelecionada == "quilos") {
+        calcularConversoes(1000 * calculo);
+        valorQuilos = 0;
+        valorXicaraCha = ((1000 * calculo) / 90).toFixed(2).replace(".", ",");
+      } else if (medidaSelecionada == "gramas") {
+        calcularConversoes(1 * calculo, 0);
+        valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = (calculo / 90).toFixed(2).replace(".", ",");
+        valorGramasExibicao = 0;
+      } else {
+        calcularConversoes(90 * calculo);
+        valorQuilos = (0.09 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = 0;
+      }
+    } else if (medidaLabel == "Xícara(s) (Café)") {
+      calcularConversoes(26 * calculo);
+      valorQuilos = (0.026 * calculo).toFixed(2).replace(".", ",");
+      valorXicaraCafe = 0;
+    } else if (medidaLabel == "Copo(s) Americano(s)") {
+      calcularConversoes(60 * calculo);
+      valorQuilos = (0.06 * calculo).toFixed(2).replace(".", ",");
+      valorCopoAmericano = 0;
+    } else if (medidaLabel == "Colher(es) (Sopa)") {
+      calcularConversoes(9 * calculo);
+      valorQuilos = (0.009 * calculo).toFixed(2).replace(".", ",");
+      valorColherSopa = 0;
+    } else if (medidaLabel == "Colher(es) (Sobremesa)") {
+      calcularConversoes(6 * calculo);
+      valorQuilos = (0.006 * calculo).toFixed(2).replace(".", ",");
+      valorColherSobremesa = 0;
+    } else if (medidaLabel == "Colher(es) (Chá)") {
+      calcularConversoes(3 * calculo);
+      valorQuilos = (0.003 * calculo).toFixed(2).replace(".", ",");
+      valorColherCha = 0;
+    } else if (medidaLabel == "Colher(es) (Café)") {
+      calcularConversoes(1.5 * calculo);
+      valorQuilos = (0.0015 * calculo).toFixed(2).replace(".", ",");
+      valorColherCafe = 0;
+    }
+  } else if (ingredienteLabel == "Sal") {
+    const calcularConversoes = (pesoGramas, gramasExib = pesoGramas) => {
+      valorGramas = pesoGramas;
+      valorGramasExibicao = gramasExib.toFixed(2).replace(".", ",");
+      valorColherSobremesa = (pesoGramas / 12).toFixed(2).replace(".", ",");
+      valorColherSopa = (pesoGramas / 18).toFixed(2).replace(".", ",");
+      valorColherCha = (pesoGramas / 6).toFixed(2).replace(".", ",");
+      valorColherCafe = (pesoGramas / 3).toFixed(2).replace(".", ",");
+      valorCopoAmericano = (pesoGramas / 192).toFixed(2).replace(".", ",");
+      valorXicaraCha = (pesoGramas / 243).toFixed(2).replace(".", ",");
+      valorXicaraCafe = (pesoGramas / 71).toFixed(2).replace(".", ",");
+    };
+    if (medidaLabel == "Xícara(s) (Chá)") {
+      if (medidaSelecionada == "quilos") {
+        calcularConversoes(1000 * calculo);
+        valorQuilos = 0;
+        valorXicaraCha = ((1000 * calculo) / 243).toFixed(2).replace(".", ",");
+      } else if (medidaSelecionada == "gramas") {
+        calcularConversoes(1 * calculo, 0);
+        valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = (calculo / 243).toFixed(2).replace(".", ",");
+        valorGramasExibicao = 0;
+      } else {
+        calcularConversoes(243 * calculo);
+        valorQuilos = (0.243 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = 0;
+      }
+    } else if (medidaLabel == "Xícara(s) (Café)") {
+      calcularConversoes(71 * calculo);
+      valorQuilos = (0.071 * calculo).toFixed(2).replace(".", ",");
+      valorXicaraCafe = 0;
+    } else if (medidaLabel == "Copo(s) Americano(s)") {
+      calcularConversoes(192 * calculo);
+      valorQuilos = (0.192 * calculo).toFixed(2).replace(".", ",");
+      valorCopoAmericano = 0;
+    } else if (medidaLabel == "Colher(es) (Sopa)") {
+      calcularConversoes(18 * calculo);
+      valorQuilos = (0.018 * calculo).toFixed(2).replace(".", ",");
+      valorColherSopa = 0;
+    } else if (medidaLabel == "Colher(es) (Sobremesa)") {
+      calcularConversoes(12 * calculo);
+      valorQuilos = (0.012 * calculo).toFixed(2).replace(".", ",");
+      valorColherSobremesa = 0;
+    } else if (medidaLabel == "Colher(es) (Chá)") {
+      calcularConversoes(6 * calculo);
+      valorQuilos = (0.006 * calculo).toFixed(2).replace(".", ",");
+      valorColherCha = 0;
+    } else if (medidaLabel == "Colher(es) (Café)") {
+      calcularConversoes(3 * calculo);
+      valorQuilos = (0.003 * calculo).toFixed(2).replace(".", ",");
+      valorColherCafe = 0;
+    }
   }
 
   // medidaSelecionada
@@ -895,7 +947,11 @@ export default function Dados({ route, navigation }) {
             ))}
         </View>
         <View style={styles.infoWrapper}>
-          <Text style={[styles.info, styles.infoMargin]}>
+          <Text
+            style={[styles.info, styles.infoMargin]}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
             •{" "}
             {ingredienteLabel === "Azeitonas sem Caroço"
               ? "1 Unidade"
@@ -913,7 +969,7 @@ export default function Dados({ route, navigation }) {
               {pesoPorIngredienteCopo(ingredienteLabel)}
             </Text>
           </Text>
-          <Text style={styles.info}>
+          <Text style={styles.info} numberOfLines={1} ellipsizeMode="tail">
             • 1 Xícara (Chá) =
             <Text style={styles.destaque}>
               {" "}
@@ -947,6 +1003,7 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     paddingBottom: 32,
     width: "86%",
+    marginTop: -15,
   },
   tabela: {
     marginTop: 20,
