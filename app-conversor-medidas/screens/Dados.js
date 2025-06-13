@@ -16,17 +16,58 @@ export default function Dados({ route, navigation }) {
   };
   const pesoPorIngredienteColher = (ingredienteLabel) => {
     if (ingredienteLabel === "Açúcar Refinado") return "18g";
-    if (ingredienteLabel === "farinha-de-trigo") return "14g";
+    if (ingredienteLabel === "Farinha de Trigo") return "14g";
+    if (ingredienteLabel === "Açúcar Cristal") return "17g";
+    if (ingredienteLabel === "Arroz Cru") return "16g";
+    if (ingredienteLabel === "Azeitonas sem Caroço") return "4,3g";
+    if (ingredienteLabel === "Carne Moída Crua") return "24g";
+    if (ingredienteLabel === "Creme de Avelã") return "24g";
+    if (ingredienteLabel === "Feijão Cru") return "18g";
+    if (ingredienteLabel === "Frango Desfiado") return "18g";
+    if (ingredienteLabel === "Grãos de Milho Cozidos")
+      return "15g (40 unidades)";
+    if (ingredienteLabel === "Líquidos") return "15ml";
+    if (ingredienteLabel === "Manteiga") return "18g";
+    if (ingredienteLabel === "Mel") return "15ml (18g)";
+    if (ingredienteLabel === "Pó de Café") return "9g";
+    if (ingredienteLabel === "Sal") return "18g";
     return "0g";
   };
   const pesoPorIngredienteCopo = (ingredienteLabel) => {
-    if (ingredienteLabel === "Açúcar Refinado") return "18g";
-    if (ingredienteLabel === "farinha-de-trigo") return "14g";
+    if (ingredienteLabel === "Açúcar Refinado") return "195g";
+    if (ingredienteLabel === "Farinha de Trigo") return "140g";
+    if (ingredienteLabel === "Açúcar Cristal") return "140g";
+    if (ingredienteLabel === "Arroz Cru") return "210g";
+    if (ingredienteLabel === "Azeitonas sem Caroço") return "95g (22 unidades)";
+    if (ingredienteLabel === "Creme de Avelã") return "270g";
+    if (ingredienteLabel === "Carne Moída Crua") return "138g";
+    if (ingredienteLabel === "Feijão Cru") return "170g";
+    if (ingredienteLabel === "Frango Desfiado") return "110g";
+    if (ingredienteLabel === "Grãos de Milho Cozidos") return "130g";
+    if (ingredienteLabel === "Líquidos") return "190ml";
+    if (ingredienteLabel === "Manteiga") return "158g";
+    if (ingredienteLabel === "Mel") return "190ml (237g)";
+    if (ingredienteLabel === "Pó de Café") return "60g";
+    if (ingredienteLabel === "Sal") return "192g";
     return "0g";
   };
   const pesoPorIngredienteXicara = (ingredienteLabel) => {
-    if (ingredienteLabel === "Açúcar Refinado") return "18g";
-    if (ingredienteLabel === "farinha-de-trigo") return "14g";
+    if (ingredienteLabel === "Açúcar Refinado") return "220g";
+    if (ingredienteLabel === "Farinha de Trigo") return "140g";
+    if (ingredienteLabel === "Açúcar Cristal") return "175g";
+    if (ingredienteLabel === "Arroz Cru") return "180g";
+    if (ingredienteLabel === "Azeitonas sem Caroço")
+      return "130g (30 unidades)";
+    if (ingredienteLabel === "Carne Moída Crua") return "172g";
+    if (ingredienteLabel === "Creme de Avelã") return "350g";
+    if (ingredienteLabel === "Feijão Cru") return "250g";
+    if (ingredienteLabel === "Frango Desfiado") return "128g";
+    if (ingredienteLabel === "Grãos de Milho Cozidos") return "190g";
+    if (ingredienteLabel === "Líquidos") return "240ml";
+    if (ingredienteLabel === "Manteiga") return "200g";
+    if (ingredienteLabel === "Mel") return "240ml (300g)";
+    if (ingredienteLabel === "Pó de Café") return "90g";
+    if (ingredienteLabel === "Sal") return "243g";
     return "0g";
   };
   let valorGramas = 0;
@@ -203,7 +244,11 @@ export default function Dados({ route, navigation }) {
             ))}
         </View>
         <Text style={styles.info}>
-          • 1 Colher (Sopa) ={" "}
+          •{" "}
+          {ingredienteLabel === "Azeitonas sem Caroço"
+            ? "1 Unidade"
+            : "1 Colher (Sopa)"}{" "}
+          ={" "}
           <Text style={styles.destaque}>
             {pesoPorIngredienteColher(ingredienteLabel)}
           </Text>
