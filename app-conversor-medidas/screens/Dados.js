@@ -1003,7 +1003,7 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     paddingBottom: 32,
     width: "86%",
-    marginTop: -15,
+    marginTop: -20,
   },
   tabela: {
     marginTop: 20,
@@ -1047,24 +1047,24 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 55,
     height: 67,
-    top: -45,
+    top: -42,
     left: 30,
   },
   hat: {
     width: 80,
     height: 83,
     position: "absolute",
-    top: -70,
+    top: -67,
     right: 40,
   },
   teaDiv: {
     position: "absolute",
-    bottom: -25,
-    right: -25,
+    bottom: -22,
+    right: -28,
   },
   tea: {
     width: 83,
-    height: 61,
+    height: 61.5,
   },
   infoWrapper: {
     marginTop: 15,

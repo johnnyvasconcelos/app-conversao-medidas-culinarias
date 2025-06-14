@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Animated,
   TextInput,
   Modal,
   Image,
@@ -89,20 +88,7 @@ export default function Home({ navigation }) {
     }
     return NaN;
   }
-  const [splashVisible, setSplashVisible] = useState(true);
-  const opacity = new Animated.Value(1);
 
-  useEffect(() => {
-    setTimeout(() => {
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }).start(() => {
-        setSplashVisible(false);
-      });
-    }, 2000);
-  }, []);
   const todasAsMedidas = [
     { label: "Colher (Sopa)", value: "colher-sopa" },
     { label: "Colher (Sobremesa)", value: "colher-sobremesa" },
@@ -813,200 +799,188 @@ export default function Home({ navigation }) {
   }
   return (
     <View style={styles.main}>
-      {splashVisible && (
-        <Animated.View style={[styles.splashContainer, { opacity }]}>
-          <Image
-            source={require("../assets/images/intro.webp")}
-            style={styles.image}
-          />
-        </Animated.View>
-      )}
+      <View style={styles.conversor}>
+        <Image
+          source={require("../assets/images/hat.webp")}
+          style={styles.hat}
+        />
+        <Image
+          source={require("../assets/images/spoon.webp")}
+          style={styles.spoon}
+        />
+        <Image
+          source={require("../assets/images/tea.webp")}
+          style={styles.tea}
+        />
 
-      {!splashVisible && (
-        <View style={styles.conversor}>
-          <Image
-            source={require("../assets/images/hat.webp")}
-            style={styles.hat}
-          />
-          <Image
-            source={require("../assets/images/spoon.webp")}
-            style={styles.spoon}
-          />
-          <Image
-            source={require("../assets/images/tea.webp")}
-            style={styles.tea}
-          />
-
-          <Text
-            style={{
-              fontFamily: "Custom-Bold",
-              fontSize: 25,
-              textAlign: "center",
-              color: "#4c2e1c",
+        <Text
+          style={{
+            fontFamily: "Custom-Bold",
+            fontSize: 24.5,
+            textAlign: "center",
+            color: "#4c2e1c",
+          }}
+        >
+          CONVERSOR DE MEDIDAS CULINÁRIAS
+        </Text>
+        <Text style={styles.label}>Selecione um Ingrediente</Text>
+        <View style={styles.selectView}>
+          <Picker
+            style={styles.select}
+            selectedValue={ingrediente}
+            onValueChange={(value) => {
+              setIngrediente(value);
+              setMedida("");
             }}
           >
-            CONVERSOR DE MEDIDAS CULINÁRIAS
-          </Text>
-          <Text style={styles.label}>Selecione um Ingrediente</Text>
-          <View style={styles.selectView}>
-            <Picker
-              style={styles.select}
-              selectedValue={ingrediente}
-              onValueChange={(value) => {
-                setIngrediente(value);
-                setMedida("");
-              }}
-            >
-              <Picker.Item label="Selecione o ingrediente" value="" />
-              <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
-              <Picker.Item label="Açúcar Cristal" value="acucar-cristal" />
-              <Picker.Item label="Arroz Cru" value="arroz-cru" />
-              <Picker.Item
-                label="Azeitonas sem Caroço"
-                value="azeitonas-sem-caroco"
-              />
-              <Picker.Item label="Carne Moída" value="carne-moida" />
-              <Picker.Item label="Creme de Avelã" value="creme-de-avela" />
-              <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
-              <Picker.Item label="Feijão Cru" value="feijao-cru" />
-              <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
-              <Picker.Item label="Grãos de Milho" value="graos-de-milho" />
-              <Picker.Item label="Líquidos" value="liquidos" />
-              <Picker.Item label="Manteiga" value="manteiga" />
-              <Picker.Item label="Mel" value="mel" />
-              <Picker.Item label="Pó de Café" value="po-de-cafe" />
-              <Picker.Item label="Sal Comum" value="sal-comum" />
-            </Picker>
-          </View>
-          <Text style={styles.label}>Selecione a Medida</Text>
-          <View style={styles.selectView}>
-            <Picker
-              style={styles.select}
-              selectedValue={medida}
-              onValueChange={(value) => setMedida(value)}
-            >
-              <Picker.Item label="Selecione a medida..." value="" />
-              {medidasFiltradas.map((m) => (
-                <Picker.Item key={m.value} label={m.label} value={m.value} />
-              ))}
-            </Picker>
-          </View>
-          <Text style={styles.label}>Quantidade</Text>
-          <View style={styles.calculoInput}>
-            <Pressable
-              onPress={diminuir}
-              style={[styles.calculoBtn, styles.calculoBtnEsquerda]}
-            >
-              <Image
-                source={require("../assets/images/diminuir.webp")}
-                style={[styles.calculoImage, styles.calculoImageEsquerda]}
-              />
-            </Pressable>
-            <TextInput
-              style={styles.calcVisivel}
-              value={calculoVisivel}
-              onChangeText={(texto) => {
-                setCalculoVisivel(texto);
-                const numero = interpretarFracao(texto);
-                if (!isNaN(numero)) {
-                  setCalculo(numero);
-                }
-              }}
-              keyboardType="numeric"
+            <Picker.Item label="Selecione o ingrediente" value="" />
+            <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
+            <Picker.Item label="Açúcar Cristal" value="acucar-cristal" />
+            <Picker.Item label="Arroz Cru" value="arroz-cru" />
+            <Picker.Item
+              label="Azeitonas sem Caroço"
+              value="azeitonas-sem-caroco"
             />
-            <Pressable
-              onPress={aumentar}
-              style={[styles.calculoBtn, styles.calculoBtnDireita]}
-            >
-              <Image
-                source={require("../assets/images/aumentar.webp")}
-                style={[styles.calculoImage, styles.calculoImageDireita]}
-              />
-            </Pressable>
-          </View>
+            <Picker.Item label="Carne Moída" value="carne-moida" />
+            <Picker.Item label="Creme de Avelã" value="creme-de-avela" />
+            <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
+            <Picker.Item label="Feijão Cru" value="feijao-cru" />
+            <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
+            <Picker.Item label="Grãos de Milho" value="graos-de-milho" />
+            <Picker.Item label="Líquidos" value="liquidos" />
+            <Picker.Item label="Manteiga" value="manteiga" />
+            <Picker.Item label="Mel" value="mel" />
+            <Picker.Item label="Pó de Café" value="po-de-cafe" />
+            <Picker.Item label="Sal Comum" value="sal-comum" />
+          </Picker>
+        </View>
+        <Text style={styles.label}>Selecione a Medida</Text>
+        <View style={styles.selectView}>
+          <Picker
+            style={styles.select}
+            selectedValue={medida}
+            onValueChange={(value) => setMedida(value)}
+          >
+            <Picker.Item label="Selecione a medida..." value="" />
+            {medidasFiltradas.map((m) => (
+              <Picker.Item key={m.value} label={m.label} value={m.value} />
+            ))}
+          </Picker>
+        </View>
+        <Text style={styles.label}>Quantidade</Text>
+        <View style={styles.calculoInput}>
           <Pressable
-            style={styles.button}
-            onPress={() => {
-              abrirTelaDados();
+            onPress={diminuir}
+            style={[styles.calculoBtn, styles.calculoBtnEsquerda]}
+          >
+            <Image
+              source={require("../assets/images/diminuir.webp")}
+              style={[styles.calculoImage, styles.calculoImageEsquerda]}
+            />
+          </Pressable>
+          <TextInput
+            style={styles.calcVisivel}
+            value={calculoVisivel}
+            onChangeText={(texto) => {
+              setCalculoVisivel(texto);
+              const numero = interpretarFracao(texto);
+              if (!isNaN(numero)) {
+                setCalculo(numero);
+              }
+            }}
+            keyboardType="numeric"
+          />
+          <Pressable
+            onPress={aumentar}
+            style={[styles.calculoBtn, styles.calculoBtnDireita]}
+          >
+            <Image
+              source={require("../assets/images/aumentar.webp")}
+              style={[styles.calculoImage, styles.calculoImageDireita]}
+            />
+          </Pressable>
+        </View>
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            abrirTelaDados();
+          }}
+        >
+          <Text style={styles.buttonText}>converter</Text>
+        </Pressable>
+        <Modal transparent visible={erroVisible} animationType="fade">
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#00000099",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <Text style={styles.buttonText}>converter</Text>
-          </Pressable>
-          <Modal transparent visible={erroVisible} animationType="fade">
             <View
               style={{
-                flex: 1,
-                backgroundColor: "#00000099",
-                justifyContent: "center",
-                alignItems: "center",
+                backgroundColor: "#fdeed3",
+                padding: 25,
+                borderRadius: 12,
+                width: "80%",
               }}
             >
-              <View
+              <Text
                 style={{
-                  backgroundColor: "#fdeed3",
-                  padding: 25,
-                  borderRadius: 12,
-                  width: "80%",
+                  fontSize: 18,
+                  marginBottom: 20,
+                  textAlign: "center",
+                }}
+              >
+                Selecione Ingrediente e Medida! ☕
+              </Text>
+              <Pressable
+                onPress={() => setErroVisible(false)}
+                style={{
+                  backgroundColor: "#c9522b",
+                  paddingVertical: 12,
+                  paddingHorizontal: 24,
+                  borderRadius: 8,
+                  alignItems: "center",
                 }}
               >
                 <Text
                   style={{
-                    fontSize: 18,
-                    marginBottom: 20,
-                    textAlign: "center",
+                    color: "#fff",
+                    fontSize: 16,
+                    fontFamily: "Custom-Bold",
                   }}
                 >
-                  Selecione Ingrediente e Medida! ☕
+                  FECHAR
                 </Text>
-                <Pressable
-                  onPress={() => setErroVisible(false)}
-                  style={{
-                    backgroundColor: "#c9522b",
-                    paddingVertical: 12,
-                    paddingHorizontal: 24,
-                    borderRadius: 8,
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: "#fff",
-                      fontSize: 16,
-                      fontFamily: "Custom-Bold",
-                    }}
-                  >
-                    FECHAR
-                  </Text>
-                </Pressable>
-              </View>
+              </Pressable>
             </View>
-          </Modal>
-          <Text style={styles.info}>
-            {calculoVisivel}{" "}
-            <Text style={styles.destaque}>
-              {nomesMedidas[medidaSelecionada] || "xícara de chá"}
-            </Text>{" "}
-            {medidaSelecionada === "unidades" &&
-            ingredienteSelecionado === "azeitonas-sem-caroco"
-              ? "de azeitonas sem caroço "
-              : ""}
-            {medidaSelecionada === "unidades" &&
-            ingredienteSelecionado === "graos-de-milho"
-              ? "de grãos de milho cozidos "
-              : ""}
-            {medidaSelecionada === "unidades" ? "possui(em)" : "comporta(m)"}{" "}
-            aproximadamente{" "}
-            <Text style={styles.destaque}>{quantidadeConvertida}</Text>{" "}
-            {medidaSelecionada === "unidades"
-              ? ""
-              : `de ${
-                  nomesIngredientes[ingredienteSelecionado] ||
-                  "Farinha de Trigo"
-                }`}
-            .
-          </Text>
-        </View>
-      )}
+          </View>
+        </Modal>
+        <Text style={styles.info}>
+          {calculoVisivel}{" "}
+          <Text style={styles.destaque}>
+            {nomesMedidas[medidaSelecionada] || "xícara de chá"}
+          </Text>{" "}
+          {medidaSelecionada === "unidades" &&
+          ingredienteSelecionado === "azeitonas-sem-caroco"
+            ? "de azeitonas sem caroço "
+            : ""}
+          {medidaSelecionada === "unidades" &&
+          ingredienteSelecionado === "graos-de-milho"
+            ? "de grãos de milho cozidos "
+            : ""}
+          {medidaSelecionada === "unidades" ? "possui(em)" : "comporta(m)"}{" "}
+          aproximadamente{" "}
+          <Text style={styles.destaque}>{quantidadeConvertida}</Text>{" "}
+          {medidaSelecionada === "unidades"
+            ? ""
+            : `de ${
+                nomesIngredientes[ingredienteSelecionado] || "Farinha de Trigo"
+              }`}
+          .
+        </Text>
+      </View>
     </View>
   );
 }
@@ -1025,29 +999,29 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 32,
     paddingVertical: 22,
-    width: "85%",
-    marginTop: -15,
+    width: "86%",
+    marginTop: -20,
   },
   spoon: {
     position: "absolute",
     width: 55,
     height: 67,
-    top: -45,
+    top: -42,
     left: 30,
   },
   hat: {
     width: 80,
     height: 83,
     position: "absolute",
-    top: -70,
+    top: -67,
     right: 40,
   },
   tea: {
     width: 83,
-    height: 61,
+    height: 61.5,
     position: "absolute",
-    bottom: -25,
-    right: -25,
+    bottom: -22,
+    right: -28,
   },
   input: {
     backgroundColor: "#fdeed3",
@@ -1152,13 +1126,5 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     backgroundColor: "#2dac99",
-  },
-  splashContainer: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
   },
 });
