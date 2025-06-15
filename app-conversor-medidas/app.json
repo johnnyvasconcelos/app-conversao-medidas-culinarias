@@ -4,11 +4,11 @@
     "slug": "app-conversor-medidas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.webp",
+    "icon": "./assets/icon.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.webp",
+      "image": "./assets/splash-icon.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#FFF6E8"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.webp",
+        "foregroundImage": "./assets/adaptive-icon.jpg",
         "backgroundColor": "#FFF6E8"
       },
       "edgeToEdgeEnabled": true,
@@ -28,9 +28,9 @@
       "package": "com.johnnym01.appconversormedidas"
     },
     "web": {
-      "favicon": "./assets/favicon.webp"
+      "favicon": "./assets/favicon.jpg"
     },
-    "plugins": ["expo-font", "expo-audio"],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "9e6959cc-b85b-4b76-a0e2-9acf9e1052ff"

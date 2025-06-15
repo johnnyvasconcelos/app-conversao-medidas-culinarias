@@ -11,7 +11,6 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { useFonts } from "expo-font";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Audio } from "expo-audio";
 const Stack = createNativeStackNavigator();
 export default function Home({ navigation }) {
   const [ingrediente, setIngrediente] = useState("");
@@ -766,18 +765,7 @@ export default function Home({ navigation }) {
     setCalculoVisivel(formatarFracao(calculo));
   }, [calculo]);
   useEffect(() => {}, [medidaSelecionada]);
-  const tocarSom = async () => {
-    try {
-      const { sound } = await Audio.Sound.createAsync(
-        require("../assets/sounds/click.mp3")
-      );
-      await sound.playAsync();
-    } catch (error) {
-      console.log("Erro ao tocar som:", error);
-    }
-  };
   const abrirTelaDados = () => {
-    tocarSom();
     const ingredienteLabel = nomesIngredientes[ingrediente];
     const medidaLabel = nomesMedidas[medida];
     if (ingredienteLabel && medidaLabel) {
@@ -832,6 +820,7 @@ export default function Home({ navigation }) {
               setIngrediente(value);
               setMedida("");
             }}
+            dropdownIconColor="#4c2e1c"
           >
             <Picker.Item label="Selecione o ingrediente" value="" />
             <Picker.Item label="Açúcar Refinado" value="acucar-refinado" />
@@ -860,6 +849,7 @@ export default function Home({ navigation }) {
             style={styles.select}
             selectedValue={medida}
             onValueChange={(value) => setMedida(value)}
+            dropdownIconColor="#4c2e1c"
           >
             <Picker.Item label="Selecione a medida..." value="" />
             {medidasFiltradas.map((m) => (
@@ -1092,6 +1082,7 @@ const styles = StyleSheet.create({
   select: {
     backgroundColor: "#fdeed3",
     borderRadius: 8,
+    color: "#4c2e1c",
   },
   button: {
     backgroundColor: "#c9522b",
@@ -1104,7 +1095,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontSize: 17,
     fontFamily: "Custom-Bold",
-    color: "white",
+    color: "#ffffff",
     textAlign: "center",
   },
   label: {
