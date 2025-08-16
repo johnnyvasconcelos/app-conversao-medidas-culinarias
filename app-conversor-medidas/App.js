@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./screens/Home";
 import Dados from "./screens/Dados";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 const Stack = createNativeStackNavigator();
 export default function App() {

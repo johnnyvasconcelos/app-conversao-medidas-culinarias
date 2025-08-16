@@ -2,13 +2,13 @@
   "expo": {
     "name": "Conversor de Medidas",
     "slug": "app-conversor-medidas",
-    "version": "1.0.1",
+    "version": "1.0.6",
     "orientation": "portrait",
-    "icon": "./assets/icon.jpg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.jpg",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFF6E8"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.jpg",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFF6E8"
       },
       "edgeToEdgeEnabled": true,
@@ -25,10 +25,15 @@
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
-      "package": "com.johnnym01.appconversormedidas"
+      "package": "com.johnnym01.appconversormedidas",
+      "ads": {
+        "config": {
+          "usesAdId": false
+        }
+      }
     },
     "web": {
-      "favicon": "./assets/favicon.jpg"
+      "favicon": "./assets/favicon.png"
     },
     "plugins": ["expo-font"],
     "extra": {

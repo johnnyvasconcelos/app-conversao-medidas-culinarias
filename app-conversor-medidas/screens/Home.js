@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,11 +7,10 @@ import {
   Modal,
   Image,
   Pressable,
+  Platform,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useFonts } from "expo-font";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-const Stack = createNativeStackNavigator();
 export default function Home({ navigation }) {
   const [ingrediente, setIngrediente] = useState("");
   const [medida, setMedida] = useState("");
@@ -611,6 +610,8 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 190, unidade: "ml" },
         gramas: { fator: 240, unidade: "g" },
         quilos: { fator: 0.24, unidade: "kg" },
+        litros: { fator: 0.24, unidade: "litros" },
+        mililitros: { fator: 240, unidade: "ml" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -976,6 +977,11 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
   main: {
     backgroundColor: "#f0c993",
     flex: 1,
@@ -991,6 +997,7 @@ const styles = StyleSheet.create({
     paddingVertical: 22,
     width: "86%",
     marginTop: -20,
+    maxWidth: 480,
   },
   spoon: {
     position: "absolute",

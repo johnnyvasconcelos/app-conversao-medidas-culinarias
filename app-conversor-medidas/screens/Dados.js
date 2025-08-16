@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-const Stack = createNativeStackNavigator();
 export default function Dados({ route, navigation }) {
   let {
     ingredienteLabel,
@@ -889,7 +887,6 @@ export default function Dados({ route, navigation }) {
     }
   }
 
-  // medidaSelecionada
   if (medidaSelecionada == "gramas") {
     medidaLabel = "Grama(s)";
   } else if (medidaSelecionada == "quilos") {
@@ -1003,6 +1000,7 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     paddingBottom: 32,
     width: "86%",
+    maxWidth: 480,
     marginTop: -20,
   },
   tabela: {
