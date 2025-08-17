@@ -22,20 +22,30 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
+        "com.google.android.gms.permission.AD_ID",
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
       "package": "com.johnnym01.appconversormedidas",
       "ads": {
         "config": {
-          "usesAdId": false
+          "usesAdId": true
         }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-1408168476808382~1352216245",
+          "iosAppId": "ca-app-pub-1408168476808382~1352216245"
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "9e6959cc-b85b-4b76-a0e2-9acf9e1052ff"

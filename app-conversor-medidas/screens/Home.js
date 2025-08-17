@@ -7,7 +7,6 @@ import {
   Modal,
   Image,
   Pressable,
-  Platform,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useFonts } from "expo-font";
