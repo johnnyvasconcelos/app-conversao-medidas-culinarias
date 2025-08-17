@@ -81,6 +81,7 @@ export default function Dados({ route, navigation }) {
   let valorLitros = 0;
   let valorMililitros = 0;
   let valorUnidades = 0;
+  let valorOncas = 0;
 
   if (ingredienteLabel == "Farinha de Trigo") {
     const calcularConversoes = (pesoGramas, gramasExib = pesoGramas) => {
@@ -93,6 +94,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 115).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 140).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 35).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -104,6 +106,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 140).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(140 * calculo);
         valorQuilos = (0.14 * calculo).toFixed(2).replace(".", ",");
@@ -145,6 +151,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 195).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 220).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 64).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -156,6 +163,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 220).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(220 * calculo);
         valorQuilos = (0.2 * calculo).toFixed(2).replace(".", ",");
@@ -197,6 +208,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 140).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 175).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 51).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -208,6 +220,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 175).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(175 * calculo);
         valorQuilos = (0.175 * calculo).toFixed(2).replace(".", ",");
@@ -249,6 +265,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 140).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 180).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 61).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -260,6 +277,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 210).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(210 * calculo);
         valorQuilos = (0.21 * calculo).toFixed(2).replace(".", ",");
@@ -298,6 +319,7 @@ export default function Dados({ route, navigation }) {
       valorXicaraCha = (pesoGramas / 130).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 34).toFixed(2).replace(".", ",");
       valorUnidades = (pesoGramas / 4.3).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -309,6 +331,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 130).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(130 * calculo);
         valorQuilos = (0.13 * calculo).toFixed(2).replace(".", ",");
@@ -338,6 +364,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 138).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 172).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 50).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -349,6 +376,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 172).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(172 * calculo);
         valorQuilos = (0.172 * calculo).toFixed(2).replace(".", ",");
@@ -390,6 +421,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 270).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 350).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 102).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -401,6 +433,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 350).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(350 * calculo);
         valorQuilos = (0.35 * calculo).toFixed(2).replace(".", ",");
@@ -442,6 +478,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 170).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 250).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 72).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -453,6 +490,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 250).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(250 * calculo);
         valorQuilos = (0.25 * calculo).toFixed(2).replace(".", ",");
@@ -494,6 +535,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 110).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 128).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 37).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -505,6 +547,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 128).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(128 * calculo);
         valorQuilos = (0.128 * calculo).toFixed(2).replace(".", ",");
@@ -546,6 +592,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 130).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 190).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 55).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -557,6 +604,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 190).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(190 * calculo);
         valorQuilos = (0.19 * calculo).toFixed(2).replace(".", ",");
@@ -603,6 +654,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 190).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 240).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 70).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 29.57).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "litros") {
@@ -614,6 +666,10 @@ export default function Dados({ route, navigation }) {
         valorLitros = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 240).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(29.57 * calculo);
+        valorQuilos = (0.2957 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(240 * calculo);
         valorLitros = (0.24 * calculo).toFixed(2).replace(".", ",");
@@ -655,6 +711,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 158).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 200).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 58).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -666,6 +723,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 200).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(200 * calculo);
         valorQuilos = (0.2 * calculo).toFixed(2).replace(".", ",");
@@ -707,6 +768,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 237).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 300).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 87).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
 
     if (medidaLabel == "Xícara(s) (Chá)") {
@@ -737,6 +799,10 @@ export default function Dados({ route, navigation }) {
         valorMililitros = 0;
         valorXicaraCha = (calculo / 240).toFixed(2).replace(".", ",");
         valorQuilos = (1260 / calculo).toFixed(2).replace(".", ",");
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(300 * calculo);
         valorQuilos = (0.3 * calculo).toFixed(2).replace(".", ",");
@@ -792,6 +858,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 60).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 90).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 26).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -803,6 +870,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 90).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(90 * calculo);
         valorQuilos = (0.09 * calculo).toFixed(2).replace(".", ",");
@@ -844,6 +915,7 @@ export default function Dados({ route, navigation }) {
       valorCopoAmericano = (pesoGramas / 192).toFixed(2).replace(".", ",");
       valorXicaraCha = (pesoGramas / 243).toFixed(2).replace(".", ",");
       valorXicaraCafe = (pesoGramas / 71).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 28.3495).toFixed(2).replace(".", ",");
     };
     if (medidaLabel == "Xícara(s) (Chá)") {
       if (medidaSelecionada == "quilos") {
@@ -855,6 +927,10 @@ export default function Dados({ route, navigation }) {
         valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = (calculo / 243).toFixed(2).replace(".", ",");
         valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(28.3495 * calculo);
+        valorQuilos = (0.283495 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
       } else {
         calcularConversoes(243 * calculo);
         valorQuilos = (0.243 * calculo).toFixed(2).replace(".", ",");
@@ -895,6 +971,8 @@ export default function Dados({ route, navigation }) {
     medidaLabel = "Litro(s)";
   } else if (medidaSelecionada == "mililitros") {
     medidaLabel = "Mililitro(s)";
+  } else if (medidaSelecionada == "oncas") {
+    medidaLabel = "Onça(s)";
   }
   return (
     <View style={styles.main}>
@@ -931,6 +1009,7 @@ export default function Dados({ route, navigation }) {
             { valor: valorMililitros, label: "Mililitro(s)" },
             { valor: valorLitros, label: "Litro(s)" },
             { valor: valorUnidades, label: "Unidade(s)" },
+            { valor: valorOncas, label: "Onça(s)" },
           ]
             .filter((item) => item.valor !== 0)
             .map((item, index, array) => (

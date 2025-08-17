@@ -94,11 +94,12 @@ export default function Home({ navigation }) {
     { label: "Xícara (Chá)", value: "xicara-cha" },
     { label: "Xícara (Café)", value: "xicara-cafe" },
     { label: "Copo Americano", value: "copo-americano" },
-    { label: "Gramas", value: "gramas" },
-    { label: "Quilos", value: "quilos" },
-    { label: "Litros", value: "litros" },
-    { label: "Mililitros", value: "mililitros" },
     { label: "Unidades", value: "unidades" },
+    { label: "Gramas (g)", value: "gramas" },
+    { label: "Quilos (kg)", value: "quilos" },
+    { label: "Litros (l)", value: "litros" },
+    { label: "Mililitros (ml)", value: "mililitros" },
+    { label: "Onças (oz, fl oz)", value: "oncas" },
   ];
 
   const valores = {
@@ -112,6 +113,7 @@ export default function Home({ navigation }) {
       "copo-americano": "195g",
       gramas: "220g",
       quilos: "0.2kg",
+      oncas: "7.76oz",
     },
     "farinha-de-trigo": {
       "colher-sopa": "14g",
@@ -123,6 +125,7 @@ export default function Home({ navigation }) {
       "copo-americano": "115g",
       gramas: "140g",
       quilos: "0.1kg",
+      oncas: "4.93oz",
     },
     "acucar-cristal": {
       "colher-sopa": "17g",
@@ -134,6 +137,7 @@ export default function Home({ navigation }) {
       "copo-americano": "140g",
       gramas: "175g",
       quilos: "0.2kg",
+      oncas: "6.17oz",
     },
     "arroz-cru": {
       "colher-sopa": "16g",
@@ -145,6 +149,7 @@ export default function Home({ navigation }) {
       "copo-americano": "180g",
       gramas: "210g",
       quilos: "0.2kg",
+      oncas: "7.41oz",
     },
     "azeitonas-sem-caroco": {
       "xicara-cha": "130g (30 unidades)",
@@ -153,6 +158,7 @@ export default function Home({ navigation }) {
       gramas: "130g (30 unidades)",
       quilos: "0.1kg (30 unidades)",
       unidades: "4.3g",
+      oncas: "4.59oz (30 unidades)",
     },
     "carne-moida": {
       "colher-sopa": "24g",
@@ -164,6 +170,7 @@ export default function Home({ navigation }) {
       "copo-americano": "138g",
       gramas: "172g",
       quilos: "0.2kg",
+      oncas: "6.07oz",
     },
     "feijao-cru": {
       "colher-sopa": "18g",
@@ -175,6 +182,7 @@ export default function Home({ navigation }) {
       "copo-americano": "170g",
       gramas: "250g",
       quilos: "0.2kg",
+      oncas: "8,82oz",
     },
     "frango-desfiado": {
       "colher-sopa": "18g",
@@ -186,6 +194,7 @@ export default function Home({ navigation }) {
       "copo-americano": "110g",
       gramas: "128g",
       quilos: "0.1kg",
+      oncas: "4,52oz",
     },
     "graos-de-milho": {
       "colher-sopa": "15g (40 unidades)",
@@ -197,7 +206,8 @@ export default function Home({ navigation }) {
       "copo-americano": "130g",
       gramas: "190g",
       quilos: "0.2kg",
-      unidades: "0.42g",
+      unidades: "0.042g",
+      oncas: "6,7oz",
     },
     liquidos: {
       "colher-sopa": "15ml",
@@ -209,6 +219,7 @@ export default function Home({ navigation }) {
       "copo-americano": "190ml",
       litros: "0.2 litros",
       mililitros: "240ml",
+      oncas: "8,12fl oz",
     },
     manteiga: {
       "colher-sopa": "18g",
@@ -220,6 +231,7 @@ export default function Home({ navigation }) {
       "copo-americano": "158g",
       gramas: "200g",
       quilos: "0.2kg",
+      oncas: "7,05oz",
     },
     mel: {
       "colher-sopa": "15ml (18g)",
@@ -233,6 +245,7 @@ export default function Home({ navigation }) {
       quilos: "0.3kg",
       mililitros: "240ml",
       litros: "0.2 litros",
+      oncas: "10.58oz",
     },
     "creme-de-avela": {
       "colher-sopa": "24g",
@@ -244,6 +257,7 @@ export default function Home({ navigation }) {
       "copo-americano": "270g",
       gramas: "350g",
       quilos: "0.3kg",
+      oncas: "12.35oz",
     },
     "po-de-cafe": {
       "colher-sopa": "9g",
@@ -255,6 +269,7 @@ export default function Home({ navigation }) {
       "copo-americano": "60g",
       gramas: "90g",
       quilos: "0.09kg",
+      oncas: "3.17oz",
     },
     "sal-comum": {
       "colher-sopa": "18g",
@@ -266,6 +281,7 @@ export default function Home({ navigation }) {
       "copo-americano": "192g",
       gramas: "243g",
       quilos: "0.2kg",
+      oncas: "8.57oz",
     },
   };
 
@@ -288,6 +304,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 195, unidade: "g" },
         gramas: { fator: 220, unidade: "g" },
         quilos: { fator: 0.22, unidade: "kg" },
+        oncas: { fator: 7.76, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -307,6 +324,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 140, unidade: "g" },
         gramas: { fator: 175, unidade: "g" },
         quilos: { fator: 0.175, unidade: "kg" },
+        oncas: { fator: 6.18, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -328,6 +346,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 180, unidade: "g" },
         gramas: { fator: 210, unidade: "g" },
         quilos: { fator: 0.21, unidade: "kg" },
+        oncas: { fator: 7.41, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medidaSelecionada === "quilos") {
@@ -350,6 +369,7 @@ export default function Home({ navigation }) {
         "copo-americano": { peso: 95, unidades: 22, unidade: "g" },
         gramas: { peso: 130, unidades: null, unidade: "g" },
         quilos: { peso: 0.13, unidades: null, unidade: "kg" },
+        oncas: { fator: 4.59, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medidaSelecionada === "quilos" || medidaSelecionada === "unidades") {
@@ -380,6 +400,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 138, unidade: "g" },
         gramas: { fator: 172, unidade: "g" },
         quilos: { fator: 0.172, unidade: "kg" },
+        oncas: { fator: 6.08, unidade: "oz" },
       };
 
       const medida = multiplicadores[medidaSelecionada];
@@ -406,6 +427,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 270, unidade: "g" },
         gramas: { fator: 350, unidade: "g" },
         quilos: { fator: 0.35, unidade: "kg" },
+        oncas: { fator: 12.35, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medidaSelecionada === "quilos") {
@@ -431,6 +453,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 60, unidade: "g" },
         gramas: { fator: 90, unidade: "g" },
         quilos: { fator: 0.09, unidade: "kg" },
+        oncas: { fator: 3.17, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -452,6 +475,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 192, unidade: "g" },
         gramas: { fator: 243, unidade: "g" },
         quilos: { fator: 0.243, unidade: "kg" },
+        oncas: { fator: 8.57, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -507,9 +531,9 @@ export default function Home({ navigation }) {
           volumeUnidade: "ml",
         },
         litros: {
-          fator: 300,
+          fator: 0.3,
           litros: 0.24,
-          unidade: "g",
+          unidade: "kg",
           volumeUnidade: " litros",
         },
         mililitros: {
@@ -524,6 +548,12 @@ export default function Home({ navigation }) {
           litros: 0.24,
           unidade: "kg",
           volumeUnidade: " litros",
+        },
+        oncas: {
+          fator: 10.58,
+          litros: 8.12,
+          unidade: "oz",
+          volumeUnidade: "fl oz",
         },
       };
 
@@ -557,6 +587,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 158, unidade: "g" },
         gramas: { fator: 200, unidade: "g" },
         quilos: { fator: 0.2, unidade: "kg" },
+        oncas: { fator: 7.05, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -579,6 +610,7 @@ export default function Home({ navigation }) {
         "copo-americano": { peso: 130, unidades: 305, unidade: "g" },
         gramas: { peso: 190, unidades: null, unidade: "g" },
         quilos: { peso: 0.19, unidades: null, unidade: "kg" },
+        oncas: { peso: 6.7, unidades: null, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medidaSelecionada === "quilos" || medidaSelecionada === "unidades") {
@@ -611,6 +643,7 @@ export default function Home({ navigation }) {
         quilos: { fator: 0.24, unidade: "kg" },
         litros: { fator: 0.24, unidade: "litros" },
         mililitros: { fator: 240, unidade: "ml" },
+        oncas: { fator: 8.12, unidade: "fl oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -632,6 +665,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 110, unidade: "g" },
         gramas: { fator: 128, unidade: "g" },
         quilos: { fator: 0.128, unidade: "kg" },
+        oncas: { fator: 4.52, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -653,6 +687,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 170, unidade: "g" },
         gramas: { fator: 250, unidade: "g" },
         quilos: { fator: 0.25, unidade: "kg" },
+        oncas: { fator: 8.82, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -674,6 +709,7 @@ export default function Home({ navigation }) {
         "copo-americano": { fator: 115, unidade: "g" },
         gramas: { fator: 140, unidade: "g" },
         quilos: { fator: 0.14, unidade: "kg" },
+        oncas: { fator: 4.93, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medida) {
@@ -700,6 +736,7 @@ export default function Home({ navigation }) {
     unidades: "Unidade(s)",
     mililitros: "Xícara(s) (Chá)",
     litros: "Xícara(s) (Chá)",
+    oncas: "Xícara(s) (Chá)",
   };
   const nomesIngredientes = {
     "acucar-refinado": "Açúcar Refinado",
