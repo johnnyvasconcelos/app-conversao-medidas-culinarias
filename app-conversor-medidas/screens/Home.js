@@ -35,10 +35,8 @@ export default function Home({ navigation }) {
         novoValor = especiais[idx + 1];
       } else if (prev < 1) {
         novoValor = 1;
-      } else if (prev >= 1 && prev < 6) {
-        novoValor = +(prev + 0.5).toFixed(2);
       } else {
-        novoValor = +(prev + 1).toFixed(2);
+        novoValor = +(prev + 0.5).toFixed(2);
       }
       setCalculoVisivel(formatarFracao(novoValor));
       return novoValor;
@@ -47,9 +45,7 @@ export default function Home({ navigation }) {
   const diminuir = () => {
     setCalculo((prev) => {
       let novoValor;
-      if (prev > 6) {
-        novoValor = +(prev - 1).toFixed(2);
-      } else if (prev > 1) {
+      if (prev > 1) {
         novoValor = +(prev - 0.5).toFixed(2);
       } else if (prev === 1) {
         novoValor = especiais[especiais.length - 1];
@@ -1473,7 +1469,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#4c2e1c",
     height: 40,
-    width: 50,
+    width: 80,
     textAlign: "center",
   },
   calculoBtn: {
