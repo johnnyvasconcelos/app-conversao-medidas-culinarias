@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MobileAds, {
@@ -10,8 +9,8 @@ import MobileAds, {
 } from "react-native-google-mobile-ads";
 import Home from "./screens/Home";
 import Dados from "./screens/Dados";
+
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   useEffect(() => {
@@ -21,14 +20,15 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{ headerShown: false, tabBarStyle: { display: "none" } }}
-      >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Dados" component={Dados} />
-      </Tab.Navigator>
-      <View style={{ alignItems: "center" }}>
+    <View style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
+          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Dados" component={Dados} />
+        </Tab.Navigator>
+      </NavigationContainer>
+
+      <View style={styles.bannerContainer}>
         <BannerAd
           unitId={TestIds.BANNER}
           size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
@@ -37,8 +37,13 @@ export default function App() {
           }}
         />
       </View>
-    </NavigationContainer>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  bannerContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

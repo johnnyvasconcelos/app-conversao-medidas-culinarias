@@ -29,6 +29,7 @@ export default function Dados({ route, navigation }) {
     if (ingredienteLabel === "Mel") return "15ml (18g)";
     if (ingredienteLabel === "Pó de Café") return "9g";
     if (ingredienteLabel === "Sal") return "18g";
+    if (ingredienteLabel === "Óleo") return "15ml (13,8g)";
     return "0g";
   };
   const pesoPorIngredienteCopo = (ingredienteLabel) => {
@@ -46,6 +47,7 @@ export default function Dados({ route, navigation }) {
     if (ingredienteLabel === "Manteiga") return "158g";
     if (ingredienteLabel === "Mel") return "190ml (237g)";
     if (ingredienteLabel === "Pó de Café") return "60g";
+    if (ingredienteLabel === "Óleo") return "190ml (174,8g)";
     if (ingredienteLabel === "Sal") return "192g";
     return "0g";
   };
@@ -64,6 +66,7 @@ export default function Dados({ route, navigation }) {
     if (ingredienteLabel === "Líquidos") return "240ml(g)";
     if (ingredienteLabel === "Manteiga") return "200g";
     if (ingredienteLabel === "Mel") return "240ml (300g)";
+    if (ingredienteLabel === "Óleo") return "240ml (220,8g)";
     if (ingredienteLabel === "Pó de Café") return "90g";
     if (ingredienteLabel === "Sal") return "243g";
     return "0g";
@@ -806,6 +809,97 @@ export default function Dados({ route, navigation }) {
       } else {
         calcularConversoes(300 * calculo);
         valorQuilos = (0.3 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = 0;
+        valorMililitros = (240 * calculo).toFixed(2).replace(".", ",");
+        valorLitros = ((240 * calculo) / 1000).toFixed(2).replace(".", ",");
+      }
+    } else if (medidaLabel == "Xícara(s) (Café)") {
+      calcularConversoes(87 * calculo);
+      valorQuilos = (0.087 * calculo).toFixed(2).replace(".", ",");
+      valorXicaraCafe = 0;
+      valorMililitros = (70 * calculo).toFixed(2).replace(".", ",");
+      valorLitros = ((70 * calculo) / 1000).toFixed(2).replace(".", ",");
+    } else if (medidaLabel == "Copo(s) Americano(s)") {
+      calcularConversoes(237 * calculo);
+      valorQuilos = (0.237 * calculo).toFixed(2).replace(".", ",");
+      valorCopoAmericano = 0;
+      valorMililitros = (190 * calculo).toFixed(2).replace(".", ",");
+      valorLitros = ((190 * calculo) / 1000).toFixed(2).replace(".", ",");
+    } else if (medidaLabel == "Colher(es) (Sopa)") {
+      calcularConversoes(18 * calculo);
+      valorQuilos = (0.018 * calculo).toFixed(2).replace(".", ",");
+      valorColherSopa = 0;
+      valorMililitros = (15 * calculo).toFixed(2).replace(".", ",");
+      valorLitros = ((15 * calculo) / 1000).toFixed(2).replace(".", ",");
+    } else if (medidaLabel == "Colher(es) (Sobremesa)") {
+      calcularConversoes(12 * calculo);
+      valorQuilos = (0.012 * calculo).toFixed(2).replace(".", ",");
+      valorColherSobremesa = 0;
+      valorMililitros = (10 * calculo).toFixed(2).replace(".", ",");
+      valorLitros = ((10 * calculo) / 1000).toFixed(2).replace(".", ",");
+    } else if (medidaLabel == "Colher(es) (Chá)") {
+      calcularConversoes(6 * calculo);
+      valorQuilos = (0.006 * calculo).toFixed(2).replace(".", ",");
+      valorColherCha = 0;
+      valorMililitros = (5 * calculo).toFixed(2).replace(".", ",");
+      valorLitros = ((5 * calculo) / 1000).toFixed(2).replace(".", ",");
+    } else if (medidaLabel == "Colher(es) (Café)") {
+      calcularConversoes(3 * calculo);
+      valorQuilos = (0.003 * calculo).toFixed(2).replace(".", ",");
+      valorColherCafe = 0;
+      valorMililitros = (2.5 * calculo).toFixed(2).replace(".", ",");
+      valorLitros = ((2.5 * calculo) / 1000).toFixed(2).replace(".", ",");
+    }
+  } else if (ingredienteLabel == "Óleo") {
+    const calcularConversoes = (pesoGramas, gramasExib = pesoGramas) => {
+      valorGramas = pesoGramas;
+      valorGramasExibicao = gramasExib.toFixed(2).replace(".", ",");
+      valorColherSobremesa = (pesoGramas / 9.2).toFixed(2).replace(".", ",");
+      valorColherSopa = (pesoGramas / 13.8).toFixed(2).replace(".", ",");
+      valorColherCha = (pesoGramas / 4.3).toFixed(2).replace(".", ",");
+      valorColherCafe = (pesoGramas / 2.3).toFixed(2).replace(".", ",");
+      valorCopoAmericano = (pesoGramas / 174.8).toFixed(2).replace(".", ",");
+      valorXicaraCha = (pesoGramas / 220.8).toFixed(2).replace(".", ",");
+      valorXicaraCafe = (pesoGramas / 64.4).toFixed(2).replace(".", ",");
+      valorOncas = (pesoGramas / 29.57).toFixed(2).replace(".", ",");
+    };
+    if (medidaLabel == "Xícara(s) (Chá)") {
+      if (medidaSelecionada == "quilos") {
+        calcularConversoes(1000 * calculo);
+        valorQuilos = 0;
+        valorXicaraCha = ((1000 * calculo) / 220.8)
+          .toFixed(2)
+          .replace(".", ",");
+        valorLitros = ((1000 * calculo) / 920).toFixed(2).replace(".", ",");
+        valorMililitros = (240 * ((1000 * calculo) / 220.8))
+          .toFixed(2)
+          .replace(".", ",");
+      } else if (medidaSelecionada == "gramas") {
+        calcularConversoes(1 * calculo, 0);
+        valorQuilos = (0.001 * calculo).toFixed(2).replace(".", ",");
+        valorXicaraCha = (calculo / 220.8).toFixed(2).replace(".", ",");
+        valorMililitros = (calculo / 0.92).toFixed(2).replace(".", ",");
+        valorLitros = (calculo / 920).toFixed(2).replace(".", ",");
+        valorGramasExibicao = 0;
+      } else if (medidaSelecionada == "litros") {
+        calcularConversoes(920 * calculo);
+        valorLitros = 0;
+        valorXicaraCha = ((920 * calculo) / 220.8).toFixed(2).replace(".", ",");
+        valorMililitros = (1000 * calculo).toFixed(2).replace(".", ",");
+        valorQuilos = (0.92 * calculo).toFixed(2).replace(".", ",");
+      } else if (medidaSelecionada == "mililitros") {
+        calcularConversoes(calculo * 0.92);
+        valorLitros = (calculo / 1000).toFixed(2).replace(".", ",");
+        valorMililitros = 0;
+        valorXicaraCha = (calculo / 240).toFixed(2).replace(".", ",");
+        valorQuilos = (920 / calculo).toFixed(2).replace(".", ",");
+      } else if (medidaSelecionada == "oncas") {
+        calcularConversoes(29.57 * calculo);
+        valorQuilos = (0.2957 * calculo).toFixed(2).replace(".", ",");
+        valorOncas = 0;
+      } else {
+        calcularConversoes(220.8 * calculo);
+        valorQuilos = (0.228 * calculo).toFixed(2).replace(".", ",");
         valorXicaraCha = 0;
         valorMililitros = (240 * calculo).toFixed(2).replace(".", ",");
         valorLitros = ((240 * calculo) / 1000).toFixed(2).replace(".", ",");

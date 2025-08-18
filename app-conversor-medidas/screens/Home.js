@@ -219,6 +219,22 @@ export default function Home({ navigation }) {
       "copo-americano": "190ml",
       litros: "0.2 litros",
       mililitros: "240ml",
+      gramas: "128g",
+      quilos: "0.1kg",
+      oncas: "8,12fl oz",
+    },
+    oleo: {
+      "colher-sopa": "15ml (13,8g)",
+      "colher-sobremesa": "10ml (9,2g)",
+      "colher-cha": "5ml (4,6g)",
+      "colher-cafe": "2.5ml (2,3g)",
+      "xicara-cha": "240ml (220,8g)",
+      "xicara-cafe": "70ml (64,4g)",
+      "copo-americano": "190ml (174,8g)",
+      gramas: "220,8g",
+      quilos: "0,22kg",
+      mililitros: "240ml",
+      litros: "0.2 litros",
       oncas: "8,12fl oz",
     },
     manteiga: {
@@ -576,6 +592,101 @@ export default function Home({ navigation }) {
         quantidadeConvertida =
           valores[ingredienteSelecionado][medidaSelecionada];
       }
+    } else if (ingredienteSelecionado === "oleo") {
+      const multiplicadores = {
+        "colher-sopa": {
+          fator: 13.8,
+          litros: 15,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-sobremesa": {
+          fator: 9.2,
+          litros: 10,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-cha": {
+          fator: 4.3,
+          litros: 5,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-cafe": {
+          fator: 2.3,
+          litros: 2.5,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "xicara-cha": {
+          fator: 220.8,
+          litros: 240,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "xicara-cafe": {
+          fator: 64.4,
+          litros: 70,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "copo-americano": {
+          fator: 174.8,
+          litros: 190,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        litros: {
+          fator: 0.24,
+          litros: 0.2208,
+          unidade: " litros",
+          volumeUnidade: "kg",
+        },
+        mililitros: {
+          fator: 240,
+          litros: 220.8,
+          unidade: "ml",
+          volumeUnidade: "g",
+        },
+        gramas: {
+          fator: 220.8,
+          litros: 240,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        quilos: {
+          fator: 0.2208,
+          litros: 0.24,
+          unidade: "kg",
+          volumeUnidade: " litros",
+        },
+        oncas: {
+          fator: 7.8,
+          litros: 8.12,
+          unidade: "oz",
+          volumeUnidade: "fl oz",
+        },
+      };
+
+      const medida = multiplicadores[medidaSelecionada];
+
+      if (medida) {
+        const isUnidadeGrande =
+          medida.unidade === "kg" || medida.volumeUnidade.includes("litro");
+
+        const peso = isUnidadeGrande
+          ? (medida.fator * calculo).toFixed(2)
+          : Math.round(medida.fator * calculo);
+
+        const volume = isUnidadeGrande
+          ? (medida.litros * calculo).toFixed(2)
+          : Math.round(medida.litros * calculo);
+
+        quantidadeConvertida = `${peso}${medida.unidade} (${volume}${medida.volumeUnidade})`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
     } else if (ingredienteSelecionado === "manteiga") {
       const multiplicadores = {
         "colher-sopa": { fator: 18, unidade: "g" },
@@ -751,6 +862,7 @@ export default function Home({ navigation }) {
     liquidos: "Líquidos",
     manteiga: "Manteiga",
     mel: "Mel",
+    oleo: "Óleo",
     "creme-de-avela": "Creme de Avelã",
     "po-de-cafe": "Pó de Café",
     "sal-comum": "Sal",
@@ -797,6 +909,8 @@ export default function Home({ navigation }) {
       (m) =>
         m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
     );
+  } else if (ingrediente === "oleo") {
+    medidasFiltradas = todasAsMedidas.filter((m) => m.value !== "unidades");
   }
   useEffect(() => {
     setCalculoVisivel(formatarFracao(calculo));
@@ -876,6 +990,7 @@ export default function Home({ navigation }) {
             <Picker.Item label="Líquidos" value="liquidos" />
             <Picker.Item label="Manteiga" value="manteiga" />
             <Picker.Item label="Mel" value="mel" />
+            <Picker.Item label="Óleo" value="oleo" />
             <Picker.Item label="Pó de Café" value="po-de-cafe" />
             <Picker.Item label="Sal Comum" value="sal-comum" />
           </Picker>
