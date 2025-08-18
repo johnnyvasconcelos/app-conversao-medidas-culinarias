@@ -97,7 +97,7 @@ export default function Home({ navigation }) {
     { label: "Unidades", value: "unidades" },
     { label: "Gramas (g)", value: "gramas" },
     { label: "Quilos (kg)", value: "quilos" },
-    { label: "Litros (l)", value: "litros" },
+    { label: "Litros", value: "litros" },
     { label: "Mililitros (ml)", value: "mililitros" },
     { label: "Onças (oz, fl oz)", value: "oncas" },
   ];
@@ -126,6 +126,25 @@ export default function Home({ navigation }) {
       gramas: "140g",
       quilos: "0.1kg",
       oncas: "4.93oz",
+    },
+    "fermento-em-po": {
+      "colher-sopa": "11g",
+      "colher-sobremesa": "6.5g",
+      "colher-cha": "3.25g",
+      "colher-cafe": "1.12g",
+      "xicara-cafe": "27g",
+      gramas: "90g",
+      quilos: "0.09kg",
+      oncas: "3.18oz",
+    },
+    "fermento-biologico": {
+      "colher-sopa": "10g",
+      "colher-sobremesa": "7g",
+      "colher-cha": "3.5g",
+      "colher-cafe": "2g",
+      "xicara-cafe": "45g",
+      gramas: "140g",
+      quilos: "0.14kg",
     },
     "acucar-cristal": {
       "colher-sopa": "17g",
@@ -159,6 +178,15 @@ export default function Home({ navigation }) {
       quilos: "0.1kg (30 unidades)",
       unidades: "4.3g",
       oncas: "4.59oz (30 unidades)",
+    },
+    "biscoitos-de-maizena": {
+      "xicara-cha": "84g (24 unidades)",
+      "xicara-cafe": "28g (7.4 unidades)",
+      "copo-americano": "66.5g (19.4 unidades)",
+      gramas: "84g (24 unidades)",
+      quilos: "0.08kg (24 unidades)",
+      unidades: "3.5g",
+      oncas: "2.96oz (24 unidades)",
     },
     "carne-moida": {
       "colher-sopa": "24g",
@@ -223,6 +251,18 @@ export default function Home({ navigation }) {
       quilos: "0.1kg",
       oncas: "8,12fl oz",
     },
+    "leite-em-po": {
+      "colher-sopa": "8g",
+      "colher-sobremesa": "5g",
+      "colher-cha": "2.5g",
+      "colher-cafe": "1.2g",
+      "xicara-cha": "120g",
+      "xicara-cafe": "35g",
+      "copo-americano": "95g",
+      gramas: "120g",
+      quilos: "0.1kg",
+      oncas: "4.23oz",
+    },
     oleo: {
       "colher-sopa": "15ml (13,8g)",
       "colher-sobremesa": "10ml (9,2g)",
@@ -233,6 +273,20 @@ export default function Home({ navigation }) {
       "copo-americano": "190ml (174,8g)",
       gramas: "220,8g",
       quilos: "0,22kg",
+      mililitros: "240ml",
+      litros: "0.2 litros",
+      oncas: "8,12fl oz",
+    },
+    iogurte: {
+      "colher-sopa": "15ml (16g)",
+      "colher-sobremesa": "10ml (10,7g)",
+      "colher-cha": "5ml (5,3g)",
+      "colher-cafe": "2.5ml (2,7g)",
+      "xicara-cha": "240ml (256g)",
+      "xicara-cafe": "70ml (74,7g)",
+      "copo-americano": "190ml (202,7g)",
+      gramas: "256g",
+      quilos: "0,25kg",
       mililitros: "240ml",
       litros: "0.2 litros",
       oncas: "8,12fl oz",
@@ -301,7 +355,11 @@ export default function Home({ navigation }) {
     },
   };
 
-  const medidaSelecionada = medida || "xicara-cha";
+  const medidaSelecionada =
+    medida ||
+    (ingrediente === "fermento-em-po" || ingrediente === "fermento-biologico"
+      ? "colher-sopa"
+      : "xicara-cha");
   const ingredienteSelecionado = ingrediente || "farinha-de-trigo";
   let quantidadeConvertida = 0;
 
@@ -386,6 +444,34 @@ export default function Home({ navigation }) {
         gramas: { peso: 130, unidades: null, unidade: "g" },
         quilos: { peso: 0.13, unidades: null, unidade: "kg" },
         oncas: { fator: 4.59, unidade: "oz" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medidaSelecionada === "quilos" || medidaSelecionada === "unidades") {
+        quantidadeConvertida = `${(medida.peso * calculo).toFixed(1)}${
+          medida.unidade
+        }`;
+      } else if (medida) {
+        const pesoFinal = Math.round(medida.peso * calculo);
+        const unidadesFinal = medida.unidades
+          ? Math.round(medida.unidades * calculo)
+          : null;
+
+        quantidadeConvertida =
+          `${pesoFinal}${medida.unidade}` +
+          (unidadesFinal ? ` (${unidadesFinal} unidades)` : "");
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "biscoitos-de-maizena") {
+      const multiplicadores = {
+        "xicara-cha": { peso: 84, unidades: 24, unidade: "g" },
+        unidades: { peso: 3.5, unidade: "g" },
+        "xicara-cafe": { peso: 29, unidades: 7.14, unidade: "g" },
+        "copo-americano": { peso: 66.5, unidades: 19.4, unidade: "g" },
+        gramas: { peso: 84, unidades: null, unidade: "g" },
+        quilos: { peso: 0.084, unidades: null, unidade: "kg" },
+        oncas: { fator: 2.96, unidade: "oz" },
       };
       const medida = multiplicadores[medidaSelecionada];
       if (medidaSelecionada === "quilos" || medidaSelecionada === "unidades") {
@@ -687,6 +773,101 @@ export default function Home({ navigation }) {
         quantidadeConvertida =
           valores[ingredienteSelecionado][medidaSelecionada];
       }
+    } else if (ingredienteSelecionado === "iogurte") {
+      const multiplicadores = {
+        "colher-sopa": {
+          fator: 16,
+          litros: 15,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-sobremesa": {
+          fator: 10.7,
+          litros: 10,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-cha": {
+          fator: 5.3,
+          litros: 5,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "colher-cafe": {
+          fator: 2.7,
+          litros: 2.5,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "xicara-cha": {
+          fator: 256,
+          litros: 240,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "xicara-cafe": {
+          fator: 74.7,
+          litros: 70,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        "copo-americano": {
+          fator: 174.8,
+          litros: 190,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        litros: {
+          fator: 0.24,
+          litros: 0.256,
+          unidade: " litros",
+          volumeUnidade: "kg",
+        },
+        mililitros: {
+          fator: 240,
+          litros: 256,
+          unidade: "ml",
+          volumeUnidade: "g",
+        },
+        gramas: {
+          fator: 256,
+          litros: 240,
+          unidade: "g",
+          volumeUnidade: "ml",
+        },
+        quilos: {
+          fator: 0.256,
+          litros: 0.24,
+          unidade: "kg",
+          volumeUnidade: " litros",
+        },
+        oncas: {
+          fator: 7.8,
+          litros: 8.12,
+          unidade: "oz",
+          volumeUnidade: "fl oz",
+        },
+      };
+
+      const medida = multiplicadores[medidaSelecionada];
+
+      if (medida) {
+        const isUnidadeGrande =
+          medida.unidade === "kg" || medida.volumeUnidade.includes("litro");
+
+        const peso = isUnidadeGrande
+          ? (medida.fator * calculo).toFixed(2)
+          : Math.round(medida.fator * calculo);
+
+        const volume = isUnidadeGrande
+          ? (medida.litros * calculo).toFixed(2)
+          : Math.round(medida.litros * calculo);
+
+        quantidadeConvertida = `${peso}${medida.unidade} (${volume}${medida.volumeUnidade})`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
     } else if (ingredienteSelecionado === "manteiga") {
       const multiplicadores = {
         "colher-sopa": { fator: 18, unidade: "g" },
@@ -831,6 +1012,68 @@ export default function Home({ navigation }) {
         quantidadeConvertida =
           valores[ingredienteSelecionado][medidaSelecionada];
       }
+    } else if (ingredienteSelecionado === "fermento-em-po") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 11, unidade: "g" },
+        "colher-sobremesa": { fator: 6.5, unidade: "g" },
+        "colher-cha": { fator: 3.25, unidade: "g" },
+        "colher-cafe": { fator: 1.12, unidade: "g" },
+        "xicara-cafe": { fator: 27, unidade: "g" },
+        gramas: { fator: 90, unidade: "g" },
+        quilos: { fator: 0.09, unidade: "kg" },
+        oncas: { fator: 3.18, unidade: "oz" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "fermento-biologico") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 10, unidade: "g" },
+        "colher-sobremesa": { fator: 7, unidade: "g" },
+        "colher-cha": { fator: 3.5, unidade: "g" },
+        "colher-cafe": { fator: 2, unidade: "g" },
+        "xicara-cafe": { fator: 45, unidade: "g" },
+        gramas: { fator: 140, unidade: "g" },
+        quilos: { fator: 0.14, unidade: "kg" },
+        oncas: { fator: 4.94, unidade: "oz" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
+    } else if (ingredienteSelecionado === "leite-em-po") {
+      const multiplicadores = {
+        "colher-sopa": { fator: 8, unidade: "g" },
+        "colher-sobremesa": { fator: 5, unidade: "g" },
+        "colher-cha": { fator: 2.5, unidade: "g" },
+        "colher-cafe": { fator: 1.25, unidade: "g" },
+        "xicara-cha": { fator: 120, unidade: "g" },
+        "xicara-cafe": { fator: 35, unidade: "g" },
+        "copo-americano": { fator: 95, unidade: "g" },
+        gramas: { fator: 120, unidade: "g" },
+        quilos: { fator: 0.12, unidade: "kg" },
+        oncas: { fator: 4.23, unidade: "oz" },
+      };
+      const medida = multiplicadores[medidaSelecionada];
+      if (medida) {
+        quantidadeConvertida = `${(medida.fator * calculo).toFixed(0)}${
+          medida.unidade
+        }`;
+      } else {
+        quantidadeConvertida =
+          valores[ingredienteSelecionado][medidaSelecionada];
+      }
     }
   }
 
@@ -852,17 +1095,22 @@ export default function Home({ navigation }) {
   const nomesIngredientes = {
     "acucar-refinado": "Açúcar Refinado",
     "farinha-de-trigo": "Farinha de Trigo",
+    "fermento-em-po": "Fermento em Pó",
     "acucar-cristal": "Açúcar Cristal",
     "arroz-cru": "Arroz Cru",
     "azeitonas-sem-caroco": "Azeitonas sem Caroço",
+    "biscoitos-de-maizena": "Biscoitos de Maizena",
     "carne-moida": "Carne Moída Crua",
+    "fermento-biologico": "Fermento Biológico",
     "feijao-cru": "Feijão Cru",
     "frango-desfiado": "Frango Desfiado",
     "graos-de-milho": "Grãos de Milho Cozidos",
     liquidos: "Líquidos",
+    "leite-em-po": "Leite em Pó",
     manteiga: "Manteiga",
     mel: "Mel",
     oleo: "Óleo",
+    iogurte: "Iogurte",
     "creme-de-avela": "Creme de Avelã",
     "po-de-cafe": "Pó de Café",
     "sal-comum": "Sal",
@@ -876,6 +1124,7 @@ export default function Home({ navigation }) {
     ingrediente === "carne-moida" ||
     ingrediente === "creme-de-avela" ||
     ingrediente === "farinha-de-trigo" ||
+    ingrediente === "leite-em-po" ||
     ingrediente === "feijao-cru" ||
     ingrediente === "frango-desfiado" ||
     ingrediente === "manteiga" ||
@@ -888,9 +1137,25 @@ export default function Home({ navigation }) {
         m.value !== "litros" &&
         m.value !== "mililitros"
     );
+  } else if (
+    ingrediente === "fermento-em-po" ||
+    ingrediente === "fermento-biologico"
+  ) {
+    medidasFiltradas = todasAsMedidas.filter(
+      (m) =>
+        m.value !== "unidades" &&
+        m.value !== "litros" &&
+        m.value !== "mililitros" &&
+        m.value !== "quilos" &&
+        m.value !== "copo-americano" &&
+        m.value !== "xicara-cha"
+    );
   } else if (ingrediente === "mel") {
     medidasFiltradas = todasAsMedidas.filter((m) => m.value !== "unidades");
-  } else if (ingrediente === "azeitonas-sem-caroco") {
+  } else if (
+    ingrediente === "azeitonas-sem-caroco" ||
+    ingrediente === "biscoitos-de-maizena"
+  ) {
     medidasFiltradas = todasAsMedidas.filter(
       (m) =>
         m.value !== "litros" &&
@@ -909,7 +1174,7 @@ export default function Home({ navigation }) {
       (m) =>
         m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
     );
-  } else if (ingrediente === "oleo") {
+  } else if (ingrediente === "oleo" || ingrediente === "iogurte") {
     medidasFiltradas = todasAsMedidas.filter((m) => m.value !== "unidades");
   }
   useEffect(() => {
@@ -938,7 +1203,7 @@ export default function Home({ navigation }) {
   }
   return (
     <View style={styles.main}>
-      <View style={styles.conversor}>
+      <View style={[styles.conversor, { transform: [{ translateY: -12 }] }]}>
         <Image
           source={require("../assets/images/hat.webp")}
           style={styles.hat}
@@ -981,13 +1246,27 @@ export default function Home({ navigation }) {
               label="Azeitonas sem Caroço"
               value="azeitonas-sem-caroco"
             />
+            <Picker.Item
+              label="Biscoitos de Maizena"
+              value="biscoitos-de-maizena"
+            />
             <Picker.Item label="Carne Moída" value="carne-moida" />
             <Picker.Item label="Creme de Avelã" value="creme-de-avela" />
             <Picker.Item label="Farinha de Trigo" value="farinha-de-trigo" />
             <Picker.Item label="Feijão Cru" value="feijao-cru" />
+            <Picker.Item
+              label="Fermento Biológico Seco"
+              value="fermento-biologico"
+            />
+            <Picker.Item
+              label="Fermento Químico em Pó"
+              value="fermento-em-po"
+            />
             <Picker.Item label="Frango Desfiado" value="frango-desfiado" />
             <Picker.Item label="Grãos de Milho" value="graos-de-milho" />
+            <Picker.Item label="Iogurte" value="iogurte" />
             <Picker.Item label="Líquidos" value="liquidos" />
+            <Picker.Item label="Leite em Pó" value="leite-em-po" />
             <Picker.Item label="Manteiga" value="manteiga" />
             <Picker.Item label="Mel" value="mel" />
             <Picker.Item label="Óleo" value="oleo" />
@@ -1102,7 +1381,7 @@ export default function Home({ navigation }) {
         <Text style={styles.info}>
           {calculoVisivel}{" "}
           <Text style={styles.destaque}>
-            {nomesMedidas[medidaSelecionada] || "xícara de chá"}
+            {nomesMedidas[medidaSelecionada] || "xicara de chá"}
           </Text>{" "}
           {medidaSelecionada === "unidades" &&
           ingredienteSelecionado === "azeitonas-sem-caroco"
@@ -1194,6 +1473,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#4c2e1c",
     height: 40,
+    width: 50,
+    textAlign: "center",
   },
   calculoBtn: {
     justifyContent: "center",
