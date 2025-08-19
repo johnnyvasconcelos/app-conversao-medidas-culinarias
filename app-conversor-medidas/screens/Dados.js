@@ -1388,7 +1388,7 @@ export default function Dados({ route, navigation }) {
   }
   return (
     <View style={styles.main}>
-      <View style={[styles.conversor, { transform: [{ translateY: -12 }] }]}>
+      <View style={[styles.conversor, { transform: [{ translateY: 25 }] }]}>
         <Image
           source={require("../assets/images/hat.webp")}
           style={styles.hat}
