@@ -2,7 +2,7 @@
   "expo": {
     "name": "Conversor de Medidas",
     "slug": "app-conversor-medidas",
-    "version": "1.0.7",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -13,12 +13,14 @@
       "backgroundColor": "#FFF6E8"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesAdvertisingId": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFF6E8"
+        "backgroundColor": "#FFF6E8",
+        "usesAdvertisingId": true
       },
       "edgeToEdgeEnabled": true,
       "permissions": [

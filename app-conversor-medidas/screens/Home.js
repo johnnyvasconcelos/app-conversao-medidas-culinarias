@@ -1199,7 +1199,7 @@ export default function Home({ navigation }) {
   }
   return (
     <View style={styles.main}>
-      <View style={[styles.conversor, { transform: [{ translateY: 25 }] }]}>
+      <View style={[styles.conversor, { transform: [{ translateY: 35 }] }]}>
         <Image
           source={require("../assets/images/hat.webp")}
           style={styles.hat}
