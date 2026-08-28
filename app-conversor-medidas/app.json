@@ -13,14 +13,12 @@
       "backgroundColor": "#FFF6E8"
     },
     "ios": {
-      "supportsTablet": true,
-      "usesAdvertisingId": true
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFF6E8",
-        "usesAdvertisingId": true
+        "backgroundColor": "#FFF6E8"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
@@ -28,12 +26,7 @@
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
-      "package": "com.johnnym01.appconversormedidas",
-      "ads": {
-        "config": {
-          "usesAdId": true
-        }
-      }
+      "package": "com.johnnym01.appconversormedidas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
