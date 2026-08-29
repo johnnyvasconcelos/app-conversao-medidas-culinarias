@@ -1131,7 +1131,7 @@ export default function Home({ navigation }) {
       (m) =>
         m.value !== "unidades" &&
         m.value !== "litros" &&
-        m.value !== "mililitros"
+        m.value !== "mililitros",
     );
   } else if (
     ingrediente === "fermento-em-po" ||
@@ -1144,7 +1144,7 @@ export default function Home({ navigation }) {
         m.value !== "mililitros" &&
         m.value !== "quilos" &&
         m.value !== "copo-americano" &&
-        m.value !== "xicara-cha"
+        m.value !== "xicara-cha",
     );
   } else if (ingrediente === "mel") {
     medidasFiltradas = todasAsMedidas.filter((m) => m.value !== "unidades");
@@ -1159,16 +1159,16 @@ export default function Home({ navigation }) {
         m.value !== "colher-sopa" &&
         m.value !== "colher-sobremesa" &&
         m.value !== "colher-cafe" &&
-        m.value !== "colher-cha"
+        m.value !== "colher-cha",
     );
   } else if (ingrediente === "graos-de-milho") {
     medidasFiltradas = todasAsMedidas.filter(
-      (m) => m.value !== "litros" && m.value !== "mililitros"
+      (m) => m.value !== "litros" && m.value !== "mililitros",
     );
   } else if (ingrediente === "liquidos") {
     medidasFiltradas = todasAsMedidas.filter(
       (m) =>
-        m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades"
+        m.value !== "gramas" && m.value !== "quilos" && m.value !== "unidades",
     );
   } else if (ingrediente === "oleo" || ingrediente === "iogurte") {
     medidasFiltradas = todasAsMedidas.filter((m) => m.value !== "unidades");
@@ -1423,7 +1423,7 @@ const styles = StyleSheet.create({
     paddingVertical: 22,
     width: "86%",
     marginTop: -20,
-    maxWidth: 480,
+    maxWidth: 380,
   },
   spoon: {
     position: "absolute",

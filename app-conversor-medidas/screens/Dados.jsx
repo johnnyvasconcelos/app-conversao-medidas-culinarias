@@ -1492,7 +1492,7 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     paddingBottom: 32,
     width: "86%",
-    maxWidth: 480,
+    maxWidth: 380,
     marginTop: -20,
   },
   tabela: {
