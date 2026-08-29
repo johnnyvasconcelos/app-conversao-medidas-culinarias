@@ -39,7 +39,8 @@
           "androidAppId": "ca-app-pub-1408168476808382~1352216245",
           "iosAppId": "ca-app-pub-1408168476808382~1352216245"
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "extra": {
       "eas": {

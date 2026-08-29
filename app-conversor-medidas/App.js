@@ -1,30 +1,15 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import MobileAds, {
-  BannerAd,
-  BannerAdSize,
-} from "react-native-google-mobile-ads";
 
 import Home from "./screens/Home";
 import Dados from "./screens/Dados";
+import { CustomBannerAd } from "./BannerAd";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [adsInitialized, setAdsInitialized] = useState(false);
-  useEffect(() => {
-    MobileAds()
-      .initialize()
-      .then(() => {
-        console.log("AdMob Iniciado.");
-        setAdsInitialized(true);
-      })
-      .catch((err) => console.log("Erro ao iniciar AdMob", err));
-  }, []);
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
@@ -36,15 +21,7 @@ export default function App() {
         </NavigationContainer>
 
         <View style={styles.bannerContainer}>
-          {adsInitialized && (
-            <BannerAd
-              unitId="ca-app-pub-1408168476808382/3847637207"
-              size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-              requestOptions={{
-                requestNonPersonalizedAdsOnly: true,
-              }}
-            />
-          )}
+          <CustomBannerAd />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
