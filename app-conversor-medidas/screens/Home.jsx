@@ -8,6 +8,8 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+SplashScreen.preventAutoHideAsync().catch(() => {});
 import { Picker } from "@react-native-picker/picker";
 import { useFonts } from "expo-font";
 export default function Home({ navigation }) {
@@ -1194,11 +1196,29 @@ export default function Home({ navigation }) {
     }
   };
 
+  {
+    /* 
   if (!fontsLoaded) {
-    return null;
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#f0c993",
+        }}
+      >
+        <Text>Carregando...</Text>
+      </View>
+    );
+  }
+  */
   }
   return (
-    <View style={styles.main}>
+    <View
+      style={styles.main}
+      onLayout={() => SplashScreen.hideAsync().catch(() => {})}
+    >
       <View style={[styles.conversor, { transform: [{ translateY: 35 }] }]}>
         <Image
           source={require("../assets/images/hat.webp")}

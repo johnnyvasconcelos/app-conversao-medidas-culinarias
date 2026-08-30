@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -32,15 +32,24 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/font-regular.ttf",
+            "./assets/fonts/font-bold.ttf",
+            "./assets/fonts/font-bolder.ttf"
+          ]
+        }
+      ],
+      "expo-asset",
       [
         "react-native-google-mobile-ads",
         {
           "androidAppId": "ca-app-pub-1408168476808382~1352216245",
           "iosAppId": "ca-app-pub-1408168476808382~1352216245"
         }
-      ],
-      "expo-asset"
+      ]
     ],
     "extra": {
       "eas": {

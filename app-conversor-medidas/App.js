@@ -5,7 +5,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import Home from "./screens/Home";
 import Dados from "./screens/Dados";
-// import { CustomBannerAd } from "./BannerAd";
+import { CustomBannerAd } from "./BannerAd";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,9 +22,9 @@ export default function App() {
           </NavigationContainer>
         </View>
 
-        {/*<View style={styles.bannerContainer}>
-          {<CustomBannerAd />
-         {</View>*/}
+        <View style={styles.bannerContainer}>
+          <CustomBannerAd />
+        </View>
       </SafeAreaView>
     </SafeAreaProvider>
   );
