@@ -1403,6 +1403,7 @@ export default function Dados({ route, navigation }) {
             fontSize: 18,
             textAlign: "center",
             color: "#4c2e1c",
+            fontWeight: "semibold",
           }}
         >
           {quantidade} {medidaLabel} de {ingredienteLabel} equivale(m) a:

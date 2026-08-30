@@ -1238,6 +1238,7 @@ export default function Home({ navigation }) {
             fontFamily: "Custom-Bold",
             fontSize: 24.5,
             textAlign: "center",
+            fontWeight: "bold",
             color: "#4c2e1c",
           }}
         >
